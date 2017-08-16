@@ -933,7 +933,7 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
     - Numerical studies
     - Real data analysis
 - @@html:<font color="#1b91ff">Summary & future directions</font>@@
-* Summary of contributions
+** Summary of contributions
 1. Development of a method to detect bidirectional pathway differential expression and is resistant to transcriptome background noise: MixEnrich
 2. Development of a nonparametric robust method to detect pathway differential expression: kMEn 
 3. Development of a gene differential expression testing procedure that can operate when sample size is one.
@@ -952,7 +952,8 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 #+END_EXPORT
 
 
-* Future directions
+** Future directions
+#+ATTR_HTML: :table rules="groups" :style font-size:70%
 - Extend the single-subject methods beyond the current Case-vs.-Baseline design.
 - Extend iDEG for gene-set analysis
 - Explore applications of single-subject methods in discovering the differences and similarities among patients.
