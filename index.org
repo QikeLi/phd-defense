@@ -1,0 +1,1037 @@
+#+EMAIL:     qikeli@gmail.com
+#+TITLE: dissertation-defense
+#+AUTHOR:    Qike Li 
+
+#+STARTUP: indent align fold hideblocks hidestars
+#+OPTIONS: reveal_center:nil reveal_control:t reveal_height:-1
+#+OPTIONS: reveal_history:nil reveal_keyboard:t reveal_overview:t
+#+OPTIONS: reveal_progress:t reveal_rolling_links:t
+#+OPTIONS: reveal_single_file:nil reveal_slide_number:"c"
+#+OPTIONS: reveal_title_slide:nil reveal_width:-1
+#+OPTIONS: num:nil 
+#+OPTIONS: toc:nil
+#+REVEAL_MARGIN: -1
+#+REVEAL_MIN_SCALE: -1
+#+REVEAL_MAX_SCALE: -1
+#+REVEAL_ROOT: ./
+#+REVEAL_TRANS: fade
+#+REVEAL_SPEED: default
+#+REVEAL_THEME: simple
+# #+REVEAL_EXTRA_CSS: css/reveal.css
+#+REVEAL_EXTRA_CSS: css/custom-qike.css
+#+REVEAL_EXTRA_CSS: css/tomorrow.css
+# #+REVEAL_EXTRA_CSS: plugin/toc-progress/toc-progress.css
+#+REVEAL_EXTRA_JS: 
+#+REVEAL_HLEVEL:1
+#+REVEAL_TITLE_SLIDE_BACKGROUND:
+#+REVEAL_TITLE_SLIDE_BACKGROUND_SIZE:
+#+REVEAL_TITLE_SLIDE_BACKGROUND_POSITION:
+#+REVEAL_TITLE_SLIDE_BACKGROUND_REPEAT:
+#+REVEAL_TITLE_SLIDE_BACKGROUND_TRANSITION:
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND:
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND_SIZE:
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND_POSITION:
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND_REPEAT:
+#+REVEAL_DEFAULT_SLIDE_BACKGROUND_TRANSITION:
+#+REVEAL_MATHJAX_URL: https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+#+REVEAL_PREAMBLE:
+#+REVEAL_HEAD_PREAMBLE:
+#+REVEAL_POSTAMBLE:
+#+REVEAL_MULTIPLEX_ID:
+#+REVEAL_MULTIPLEX_SECRET:
+#+REVEAL_MULTIPLEX_URL:
+#+REVEAL_MULTIPLEX_SOCKETIO_URL:
+#+REVEAL_SLIDE_HEADER:
+#+REVEAL_SLIDE_FOOTER:
+#+REVEAL_PLUGINS: (classList markdown highlight zoom notes multiplex)
+#+REVEAL_DEFAULT_FRAG_STYLE:
+# #+REVEAL_INIT_SCRIPT: { src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize(); toc_progress.create(); } }
+#+REVEAL_HIGHLIGHT_CSS: %r/lib/css/zenburn.css
+# #+REVEAL_INIT_SCRIPT:.slide: style="text-align: left;"
+
+
+# the following set up for external plugins.
+# 
+#+BEGIN_SRC emacs-lisp :exports none :eval no
+;; To eable the third party plug-in:toc-progress, I need to remove "no" 
+;: after :eval for this code block and C-c C-c to evaluate this code block. 
+;; In addtion, line 19, containing 'toc-progress.css', needs to be un-commented
+;; To turn this feature off, run elisp :(custom-set-variables '(org-reveal-external-plugins nil))
+(custom-set-variables '(org-reveal-external-plugins '((toc-progress . "{src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize(); toc_progress.create(); }}") ))) 
+#+END_SRC
+
+
+** New Statistical Methods of  @@html:<br>@@ Single-subject Transcriptome Analysis for Precision Medicine
+
+    #+BEGIN_EXPORT html
+    <hr class="shadow">
+    #+END_EXPORT
+Qike Li 
+#+ATTR_HTML: :style font-size:70% 
+Lussier Group\\
+Center for Biomedical Informatics & Biostatistics (CB2) \\
+Statistics GIDP, University of Arizona \\
+@@html:<br>@@
+Statistical advisor: Dr. Hao Helen Zhang \\
+Biomedical informatics advisor: Dr. Yves A. Lussier
+
+#+ATTR_HTML: :align left :height 80px
+[[./Figures/statistics-gidp.png]]
+
+#+ATTR_HTML: :align right :height 80px
+[[./Figures/ua_logo.png]]
+
+#+ATTR_HTML: :align center :height 80px
+[[./Figures/Lussier.png]]
+
+* Presentation outline
+#+ATTR_REVEAL: :frag (highlight-blue none none)
+- Background & Motivating data
+- Methodology
+  - MixEnrich 
+  - kMEn 
+  - iDEG
+    - Procedure
+    - Numerical studies
+    - Real data analysis
+- Summary & future directions
+
+# * Background
+# - Precision Medicine
+# - Single-subject analysis
+# - Example RNA-Seq quantified mRNA expression data (Single-Subject)
+# - Our goal
+# - Main Challenges
+# - Our solution (iDEG)
+** Precision Medicine 
+#+ATTR_HTML: :align center 
+   [[./Figures/PGX.jpg]]  
+ 
+** Single-subject analysis
+@@html:<br><br>@@
+ #+ATTR_HTML: :style background-color:lightgray
+  @@html:<span class="fragment highlight-blue">@@Single-subject analysis@@html:</span>@@ studies  @@html:<span class="fragment highlight-blue">@@one patient@@html:</span>@@ at a time, with the purpose of revealing the  @@html:<span class="fragment highlight-blue">@@patient-specific@@html:</span>@@ disease mechanisms for highly heterogeneous diseases.
+** Single-subject analysis
+ #+ATTR_HTML: :align right
+ [[./Figures/single-subject-analysis2.png]]
+** Example RNA-Seq quantified mRNA expression data (Single-Subject)
+@@html:<br>@@
+#+BEGIN_SRC R :exports none :results output :session :eval no
+load('~/Dropbox/Qike/adaptive_cutoff/Figures/Fig_BRCA_TNBC/Data/TCGA-GI-A2C9.RDat')
+
+exp_tnbc_A2C9 <- round(exp_tnbc_A2C9)
+table_tnbc_A2C9 <- data.frame(Gene = rownames(exp_tnbc_A2C9),
+                              Case_expression = exp_tnbc_A2C9$Tumor_Sample,
+                              Baseline_expression = exp_tnbc_A2C9$Healthy_Sample)
+
+table_tnbc_A2C9_print <- head(table_tnbc_A2C9,10)
+table_tnbc_A2C9_print <- ascii::ascii(table_tnbc_A2C9_print,
+               header = T,
+               include.rownames = F,
+               include.colnames = T,
+               format = 'd',
+               frame = 'topbot',
+               caption = 'TNBC example')
+
+print(table_tnbc_A2C9_print, type = 'org')
+#+END_SRC
+
+#+CAPTION: Single-subject RNA-Seq data example
+|--------+-----------------+---------------------|
+| Gene   | Case expression | Baseline expression |
+|--------+-----------------+---------------------|
+| /      |               < |                     |
+| A1BG   |              92 |                  72 |
+| A1CF   |               1 |                   0 |
+| A2BP1  |               0 |                   2 |
+| A2LD1  |             127 |                  71 |
+| A2ML1  |             773 |                  12 |
+| A2M    |           11825 |               29385 |
+| A4GALT |             871 |                 891 |
+| A4GNT  |               1 |                   5 |
+| AAA1   |               0 |                   0 |
+| AAAS   |             414 |                 460 |
+| ...    |             ... |                 ... |
+|--------+-----------------+---------------------|
+
+
+#+BEGIN_EXPORT html
+<div class="reference"> 
+<br><br><br><br>
+<font><hr></hr><sup> Table 1: Data source <a href="https://portal.gdc.cancer.gov/">https://portal.gdc.cancer.gov/</a></sup> </font>
+</div>
+#+END_EXPORT
+#+REVEAL: split
+#+ATTR_HTML: :height 650px
+[[./Figures/giphy.gif]]
+** Our goal 
+#+ATTR_HTML: :align left 
+#+ATTR_HTML: :style font-size:95% 
+From two matched transcriptomes, identify *patient-specific* molecular defects and cellular processes leading to a patient's pathology:
+#+ATTR_REVEAL: :frag (appear) 
+#+ATTR_HTML: :style font-size:90% 
+ -  @@html:<u>d</u>@@ifferentially @@html:<u>e</u>@@xpressed @@html:<u>p</u>@@athways (DEP) 
+ -  @@html:<u>d</u>@@ifferentially @@html:<u>e</u>@@xpressed @@html:<u>g</u>@@enes (DEG) 
+** Main Challenges
+
+#+ATTR_HTML: :align left
+Main challenges in single-subject transcriptome analysis:
+- "Single-subject Single-observation", i.e., sample size is *1*.
+  - Different genes have different variances. 
+  - For each gene, we have only two numbers to work with.
+
+#+BEGIN_SRC R :exports results :results graphics :file ./Figures/fig-tnbc.png :session :eval no
+base_size <- 20
+dat_plot <- table_tnbc_A2C9[,2:3]
+     ## plot data
+
+## p_pois_fc <- 
+##     ggplot(data = dat_plot, 
+##            aes(x = rowMeans(dat_plot), y = log2(Case_expression + 1) - log2(Baseline_expression+1))) +
+##     geom_point(alpha = trans_value) +
+##     xlim(0,10000)+
+##     labs(x = TeX('$\\mu_{g1}$'), y= TeX('$log_2(Y_{g2} + 1) - log_2(Y_{g1} + 1)$')) 
+## p_pois_fc 
+
+p_tnbc <- 
+    ggplot(data = dat_plot, 
+           aes(x = rowMeans(dat_plot), y = Case_expression - Baseline_expression)) +
+    geom_point(alpha = .6) +
+    xlim(0,4000)+
+    ylim(-5000,5000)+
+    labs(x = latex2exp::TeX('$\\frac{Case + Baseline}{2}$'), y= 'Case - Baseline') +
+    theme_bw(base_size = base_size)
+p_tnbc
+#+END_SRC
+
+** Our solutions 
+#+ATTR_HTML: :align left
+To identify DEP:
+- @@html:N-of-1-<i>pathways</i> MixEnrich@@
+- @@html:N-of-1-<i>pathways</i> kMEn@@
+#+ATTR_HTML: :align left
+To identify DEG:
+- iDEG
+** Our solution                                                   :noexport:
+#+ATTR_HTML: :align left
+#+ATTR_REVEAL: :frag (appear)
+#+ATTR_HTML: :style font-size:80% 
+*MixEnrich*
+#+ATTR_HTML: :style font-size:60% 
+#+ATTR_REVEAL: :frag (appear)
+- Employs statistical learning approach, Gaussian mixture model, to cluster genes based on the differential expression status
+- Utilizes external gene set definition
+#+ATTR_HTML: :align left
+#+ATTR_REVEAL: :frag (appear)
+#+ATTR_HTML: :style font-size:80% 
+*kMEn*
+#+ATTR_HTML: :style font-size:60% 
+#+ATTR_REVEAL: :frag (appear)
+- Employs nonparametric model, k-means, to cluster genes based on the differential expression status. 
+- Utilizes external gene set definition
+#+ATTR_HTML: :align left
+#+ATTR_REVEAL: :frag (appear)
+#+ATTR_HTML: :style font-size:80% 
+*iDEG*
+#+ATTR_REVEAL: :frag (appear)
+#+ATTR_HTML: :style font-size:60% 
+- *Bypass gene-level variance estimation*: Transform RNA-Seq data such that, under null hypothesis, all genes have the same variance.
+- *Borrow strength across genes*: model all genes in a single model
+* Presentation outline
+- Background & Motivating data
+- Methodology
+  - @@html:<font color="#1b91ff">MixEnrich</font>@@  
+  - kMEn 
+  - iDEG
+    - Procedure
+    - Numerical studies
+    - Real data analysis
+- Summary & future directions
+** Gaol 
+@@html:<br>@@
+#+ATTR_HTML: :align left 
+Identify differentially expressed pathways from two matched transcriptomes (e.g., tumor vs. healthy sample).  
+** Limitations of existing methods
+- Existing methods:
+  - @@html:N-of-1-<i>pathways</i> Wilcoxon@@
+  - @@html:N-of-1-<i>pathways</i> MD@@
+- Their limitations:
+  - Cannot identify dysregulated pathways if genes in the pathway are regulated in opposing directions
+  - Yield high false positive rate when background noise is present
+** Approach
+@@html:<br>@@
+[[./Figures/MixEnrich-outline.png]]
+** Publication
+[[./Figures/mixenrich-paper.png]]
+* Presentation outline
+- Background & Motivating data
+- Methodology
+  - MixEnrich
+  - @@html:<font color="#1b91ff">kMEn</font>@@  
+  - iDEG
+    - Procedure
+    - Numerical studies
+    - Real data analysis
+- Summary & future directions
+
+** Gaol 
+@@html:<br>@@
+#+ATTR_HTML: :align left
+Provide a robust model to identify differentially expressed pathways from a pair of transcriptomes (e.g., tumor vs. healthy sample)  
+** Approach
+@@html:<br>@@
+[[./Figures/kMEn-outline.png]]
+** Publication
+[[./Figures/kmen-paper.png]]
+
+* Presentation outline
+- Background & Motivating data
+- Methodology
+  - MixEnrich
+  - kMEn
+  - @@html:<font color="#1b91ff">iDEG</font>@@
+      #+ATTR_REVEAL: :frag (highlight-blue none none)
+    - Procedure
+    - Numerical studies
+    - Real data analysis
+- Summary & future directions
+
+** Gaol
+@@html:<br>@@
+#+ATTR_HTML: :align left :style font-size:90%
+Identify a set of patient-specific differentially expressed genes (DEGs) from two matched transcriptomes.
+
+** Example RNA-Seq quantified mRNA expression data (Single-Subject)
+@@html:<br>@@
+#+BEGIN_SRC R :exports none :results output :session :eval no
+load('~/Dropbox/Qike/adaptive_cutoff/Figures/Fig_BRCA_TNBC/Data/TCGA-GI-A2C9.RDat')
+
+exp_tnbc_A2C9 <- round(exp_tnbc_A2C9)
+table_tnbc_A2C9 <- data.frame(Gene = rownames(exp_tnbc_A2C9),
+                              Case_expression = exp_tnbc_A2C9$Tumor_Sample,
+                              Baseline_expression = exp_tnbc_A2C9$Healthy_Sample)
+
+table_tnbc_A2C9_print <- head(table_tnbc_A2C9,10)
+table_tnbc_A2C9_print <- ascii::ascii(table_tnbc_A2C9_print,
+               header = T,
+               include.rownames = F,
+               include.colnames = T,
+               format = 'd',
+               frame = 'topbot',
+               caption = 'TNBC example')
+
+print(table_tnbc_A2C9_print, type = 'org')
+#+END_SRC
+
+#+CAPTION: Single-subject RNA-Seq data example
+|--------+-----------------+---------------------|
+| Gene   | Case expression | Baseline expression |
+|--------+-----------------+---------------------|
+| /      |               < |                     |
+| A1BG   |              92 |                  72 |
+| A1CF   |               1 |                   0 |
+| A2BP1  |               0 |                   2 |
+| A2LD1  |             127 |                  71 |
+| A2ML1  |             773 |                  12 |
+| A2M    |           11825 |               29385 |
+| A4GALT |             871 |                 891 |
+| A4GNT  |               1 |                   5 |
+| AAA1   |               0 |                   0 |
+| AAAS   |             414 |                 460 |
+| ...    |             ... |                 ... |
+|--------+-----------------+---------------------|
+
+** Modeling RNA data--Poisson
+@@html:<br>@@
+#+ATTR_HTML: :align left :style font-size:90%
+Model RNA-Seq data with Poisson distribution:
+@@html:<br>@@
+#+ATTR_HTML: :style font-size:90%
+\begin{eqnarray}
+    P(y_{gd} | \mu_{gd})  &=& \frac{\mu_{gd}^{y_{gd}} e^{-\mu_{gd}}} {y_{gd}!} \\
+     &&\quad y_{gd}  = 0,1,\cdots; \\
+     &&\quad g=1, \cdots, G; ~d= 1,2\\
+  E(Y_{gd}) &=& \mu_{gd}\\
+  Var(Y_{gd}) &=& \mu_{gd}
+\end{eqnarray}
+
+** Modeling RNA data--negative binomial
+@@html:<br>@@
+#+ATTR_HTML: :align left :style font-size:90%
+Model RNA-Seq data with negative binomial distribution:
+@@html:<br>@@
+#+ATTR_HTML: :style font-size:90%
+\begin{eqnarray}
+    P(y_{gd} | \mu_{gd}, \delta_g)  &=& 
+    (1 + \delta_{g}\mu_{gd})^{-1/\delta_{g}} \frac{\Gamma(y_{gd} + 1/\delta_{g})}{y_{gd}!\Gamma(1/\delta_{g})} \big(\frac{\delta_{g}\mu_{gd}}{1 + \delta_{g}\mu_{gd}}\big)^{y_{gd}} \nonumber \\
+    &&\quad y_{gd}  = 0,1,\cdots; \\
+     &&\quad g=1, \cdots, G; ~ d= 1,2 \label{eq:nb}\\
+  E(Y_{gd}) &=& \mu_{gd}\\
+  Var(Y_{gd}) &=& \mu_{gd} + \delta_{g}\mu_{gd}^{2}\label{eq:nbVar}
+\end{eqnarray}
+** Existing methods and their limitations
+- Arbitrary cutoff 
+  - of gene expression fold changes
+  - of gene expression absolute differences
+- GFOLD [fn:1:]  
+
+  It provides biologically meaningful gene ranks for differential expression, but no significance assessment
+#+BEGIN_EXPORT html
+<div class="reference"> 
+<br><br><br><br><br>
+<font ><hr></hr><sup>1. Feng, J. et. al., 2012, <i> Bioinformatics </i></sup> </font>
+</div>
+#+END_EXPORT
+** Existing methods and their limitations
+
+- DESeq[fn:1:]  
+
+  DESeq assumes that most genes are nonDEG and estimates a mean-variance relationship from treating the two samples as if they were replicates.
+- DEGSeq[fn:2:]
+
+  DEGseq models RNA-Seq data by binomial distribution and groups genes with similar expression level to estimate the variance in their expression counts.  It is insufficient to model over-dispersed RNA-Seq data. 
+#+BEGIN_EXPORT html
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Anders, S. et. al., 2010, <i> Genome biology </i> </li>
+<li style="font-size:85%"> Wang, L. et al., 2009, <i>Bioinformatics</i></li>
+</ol>
+</div>
+#+END_EXPORT
+
+** Existing methods and their limitations
+- edgeR[fn:1:]
+
+  edgeR assigns an arbitrary value of the dispersion parameter to all genes and conducts a negative binomial exact test to compute p-values.
+
+#+BEGIN_EXPORT html
+
+<div class="reference"> 
+<br><br><br><br><br><br><br><br>
+<font ><hr></hr><sup>1.Robinson, M. D. et. al., 2010, <i>Bioinformatics</i></sup> </font>
+</div>
+#+END_EXPORT
+
+** Plot single-subject RNA-Seq data
+#+BEGIN_SRC R :exports none :results output :session :eval no
+rm(list=ls())
+ 
+## load in ggplot objects
+load('~/Dropbox/Qike/adaptive_cutoff/Figures/Fig_examples/Results/fig-examples.RData', verbose = T)
+
+base_size <- 20
+## panel 1
+p1 <- p_pois +
+    theme_bw(base_size = base_size) +
+    guides(col = guide_legend(title = "DEG status", title.position = "left"),
+           shape = guide_legend(title = "DEG status", title.position = "left")) +
+    ggtitle('Before Transformation') + 
+    theme(plot.margin = unit(c(2.5,.5,0.5,1.2), "lines"),
+          plot.title = element_text(hjust = 0.5,lineheight=.8, face="bold")) 
+
+
+
+## panel 2
+p2 <- p_pois_tran +
+    theme_bw(base_size = base_size) +
+    guides(col = guide_legend(title = "DEG status", title.position = "left"),
+           shape = guide_legend(title = "DEG status", title.position = "left")) +
+    ggtitle('After Transformation') +
+    theme(plot.margin = unit(c(2.5,.5,0.5,1.2), "lines"),
+          plot.title = element_text(hjust = 0.5,lineheight=.8, face="bold"),
+          legend.position = 'top') +
+    labs(y = latex2exp::TeX('$h(Y_{g2}) - h(Y_{g1})$'))
+
+
+p_comb <- cowplot::plot_grid(p1 + theme(legend.position = 'none'),
+                             p2 + theme(legend.position = 'none'),
+                             ncol = 2)
+
+p_comb <- cowplot::plot_grid(p_comb,
+                             cowplot::get_legend(p2),
+                             nrow = 2,
+                             rel_heights = c(1, .03))
+#+END_SRC
+
+#+RESULTS:
+: Loading objects:
+:   p_pois
+:   p_pois_tran
+:   p_pois_iDEG
+:   p_nb
+:   p_nb_tran
+:   p_nb_iDEG
+:   p_pois_fdr
+
+#+BEGIN_SRC R :exports none :results graphics :file ./Figures/fig-beforeVST.png :width 500 :height 600 :session :eval no
+p1 + theme(legend.position = 'bottom') + ggtitle('')
+#+END_SRC
+
+[[./Figures/fig-beforeVST.png]]
+
+** Stabilize variance
+#+BEGIN_SRC R :exports none :results graphics :file ./Figures/fig-trans.png :session :width 850 :height 600 :eval no
+cowplot::plot_grid(p_comb, get_legend(p1 + theme(legend.position = 'bottom')),ncol = 1, rel_heights = c(3, .3)) 
+#+END_SRC
+
+#+RESULTS:
+[[file:./Figures/fig-trans.png]]
+
+[[./Figures/fig-trans.png]]
+** 
+@@html:<br><br><br><br><br>@@
+iDEG--Poisson Case
+** VST--Poisson
+@@html:<br>@@
+#+ATTR_HTML: :align left
+Assume 
+#+ATTR_HTML: :style font-size:85% 
+\begin{equation}
+Y_{gd} \sim \mbox{Poisson} (\mu_{gd})
+\end{equation}
+@@html:<br>@@
+#+ATTR_HTML: :align left
+then
+#+ATTR_HTML: :style font-size:85%
+\begin{equation}
+    h_{Pois}(Y_{gd}) = \sqrt{Y_{gd}}+\sqrt{Y_{gd} +1} \overset{\cdot}{\sim}  N(\sqrt{\mu_{gd}}+\sqrt{\mu_{gd}+1}, 1), \quad  d=1,2.
+\end{equation}
+
+** Summary statistic $\scriptsize{Z_{g}}$
+@@html:<br><br>@@
+#+ATTR_HTML: :align left
+Under null hypothesis:
+@@html:<br>@@
+#+ATTR_HTML: :style font-size:90% 
+ \begin{equation}
+ \qquad Z_{g} = \frac{1}{\sqrt{2}}[h_{Pois}(Y_{g2}) - h_{Pois}(Y_{g1})] \overset{\cdot}{\sim} \text{N}(0,1)
+ \end{equation}
+
+** Two-group mixture model
+#+ATTR_HTML: :align left
+Suppose $G$ genes are measured in the RNA-Seq experiment, each of the genes is either null or differentially expressed with prior probabilities $\pi_{0}$ or $\pi_{1} = 1-\pi_{0}$. And the density function of $z_{g}$ is either $f_{0}(z)$ or $f_{1}(z)$.
+
+#+ATTR_HTML: :style font-size:90% 
+\begin{eqnarray*}
+      \pi_{0} &=& Pr\{\mbox{gene $g$ is null}\} \\
+    \pi_{1} &=& Pr\{\mbox{gene $g$ is DEG}\}
+\end{eqnarray*}
+
+#+ATTR_HTML: :align left
+The marginal mixture density is:
+#+ATTR_HTML: :style font-size:90% 
+\begin{equation*}
+  \label{eq:mixtureDens}
+  f(z) = \pi_{0}f_{0}(z) + \pi_{1}f_{1}(z)
+\end{equation*}
+
+** Two-group mixture model
+#+ATTR_HTML: :align left
+The local false positive rate, $fdr$, is the Bayes posterior probability that a gene $g$ is a null gene given $z_{g}$: 
+@@html:<br><br>@@
+#+ATTR_HTML: :style font-size:90% 
+\begin{equation*}
+  fdr(z) \equiv Pr\{\text{null gene} | z\} = \pi_{0}f_{0}(z)/f(z)
+\end{equation*}
+
+** Two-group mixture model
+#+ATTR_HTML: :align left :style font-size:90%
+$f_{0}$ corresponds to an empirical null distribution. 
+#+ATTR_HTML: :align left :style font-size:90%
+In large-scale simultaneous hypothesis testing, the theoretical null may be deficient due to various reasons: 
+
+- correlation across genes
+
+- unobserved covariates (e.g. gender, age, smoking status, etc.)
+
+- or failed mathematical assumptions (e.g. asymptotic approximation).
+#+ATTR_HTML: :align left :style font-size:90%
+ Fortunately, in large-scale simultaneous testing, the parallel structure allows the estimation of an empirical null distribution, via empirical Bayes, from the own data of the study. 
+** Algorithm
+
+- *Step 1.* Apply the VST transformation to expression counts for each gene.
+- *Step 2.* Compute the summary statistic $Z_g$ for each gene.
+- *Step 3.* Estimate the local false discovery rate $fdr(z_g)$ for each gene.
+
+** 
+@@html:<br><br><br><br><br>@@
+iDEG--negative binomial Case
+** VST-negative binomial
+@@html:<br><br>@@
+#+ATTR_HTML: :style font-size:85%
+\begin{equation}
+h_{nb}(Y_{gd}) = \frac{1}{\sqrt{\delta_{g}}}sinh^{-1}\sqrt{Y_{gd} \delta_{g}} +\sqrt{1/\delta_{g} - 1}sinh^{-1}\sqrt{\frac{Y_{gd} + 3/4}{1/\delta_{g} -3/2}}  
+\end{equation}
+** Estimate $\scriptsize{\delta_g}$
+#+ATTR_HTML: :align left
+Assumptions 
+#+ATTR_REVEAL: :frag (appear)
+  - We assume $\delta_{g1} = \delta_{g2} = \delta_{g}$ and $\delta_{g}$ is a smooth function $q(\cdot)$ of the expression mean $\mu_{g}$.
+  - We assume the majority of the genes null genes ($\overline{\mathcal{G}}$).   
+# Specifically,   
+# #+ATTR_HTML: :style font-size:80%
+# \begin{eqnarray*}
+#     && Y_{gd} \overset{\cdot}{\sim} NB(\bar{\mu}_w,\bar{\delta}_w) \nonumber\\
+#     && \qquad \forall g \in \{\text{null genes in }w^{th} \text{window}\}\\
+#     && \qquad  d = 1,2      
+# \end{eqnarray*}
+
+
+    # , and estimate $\mu_{w}$ and $\sigma^{2}_{w}$ for each window by outlier robust estimators, median and MAD, respectively. 
+** Estimate $\scriptsize{\delta_g}$
+- *Step 1: "Initial" estimate of $\delta_g$*
+   #+ATTR_HTML: :style font-size:95%
+  1. Define the \(w^{th}\) window as
+     #+ATTR_HTML: :style font-size:23px
+     \begin{equation} 
+     \mathcal{G}_w= \{g: (w-1)^{th} ~ \mbox{percentile of} ~ Y_{g1} < Y_{g1} \leq w^{th} ~ \mbox{percentile of} ~ Y_{g1}\}
+     \end{equation}
+   #+ATTR_HTML: :style font-size:95%
+  2. Then all the null genes falling within the same window, $\mathcal{G}_w$, roughly have the same mean and $\delta$ values, i.e., 
+     #+ATTR_HTML: :style font-size:23px
+     \begin{equation*}
+     Y_{gd} \overset{\cdot}{\sim} NB(\bar\mu_{w}, \bar\delta_{w}), \quad \forall g \in \mathcal{G}_w\cap\overline{\mathcal{G}} ~~ d=1,2,
+     \end{equation*} 
+** Estimate $\scriptsize{\delta_g}$
+- *Step 1: "Initial" estimate of $\delta_g$*
+   #+ATTR_HTML: :style font-size:95%
+  3. [@3] Estimate $\bar\mu_{w}$ and $\bar\sigma_{w}$
+     #+ATTR_HTML: :style font-size:23px
+     \begin{eqnarray}
+     \hat{\bar\mu}_{w} &=& \text{Median} (Y_{g1}) \quad\forall g\in \mathcal{G}_w,\\
+     \hat{\bar\sigma}_{w} &=& \text{Median} (|Y_{g1} - \text{Median}(Y_{g1})|)  \quad\forall g\in\mathcal{G}_w. \label{eq:MAD-win}
+     \end{eqnarray}
+   #+ATTR_HTML: :style font-size:95%
+  4. Compute $\bar\delta_{w}$ 
+     #+ATTR_HTML: :style font-size:23px
+     \begin{equation}
+       \hat{\bar\delta}_{w} = \frac{\hat{\bar\sigma}_{w}^{2} - \hat{\bar\mu}_{w}}{\hat{\bar\mu}_{w}^{2}}, \quad w=1,\ldots, W.
+     \end{equation}
+** Estimate $\scriptsize{\delta_g}$
+- *Step 2: "Refined" smooth estimate of \(\delta_{g}\)*
+   #+ATTR_HTML: :style font-size:95%
+ 1. Estimate the equation $q$ by solving 
+   \begin{equation}
+   \label{eq:smoothFit}
+   \min_{q\in\mathcal{Q}}\sum_{w=1}^{W} \{\hat{\bar\delta}_{w}-q(\hat{\bar\mu}_{w})\}^2 + \lambda\int [q^{''}(t)]^2 dt,
+   \end{equation}
+   #+ATTR_HTML: :style font-size:95%
+ 2. Obtain the refined estimate
+   \begin{equation}
+   \label{eq:prediction}
+   \hat{\delta}_g = \hat{q}_\lambda(\hat{\bar\mu}_w), \qquad \forall g\in\mathcal{G}_w,~~ w=1,\ldots, W. 
+   \end{equation} 
+
+** Compute local false discovery rate
+#+ATTR_HTML: :align left
+- compute the summary statistic $Z_g$
+#+ATTR_HTML: :style font-size:90% 
+ \begin{equation}
+ \qquad Z_{g} = \frac{1}{\sqrt{2}}[h_{nb}(Y_{g2}) - h_{nb}(Y_{g1})] 
+ \end{equation}
+- compute the local false discovery rate
+#+ATTR_HTML: :style font-size:90% 
+\begin{equation*}
+  fdr(z_g) \equiv Pr\{\text{null gene} | z\} = \pi_{0}f_{0}(z_g)/f(z_g)
+\end{equation*}
+** Algorithm
+#+ATTR_HTML: :style font-size:80%
+- *Step 1.* Group genes into windows based on their gene expression levels.
+- *Step 2.* Compute $\hat{\bar{\mu}}_{w}$ and $\hat{\bar{\sigma}}^2_w$ for each window $w$, and obtain a "raw" estimate of $\delta_g$.
+- *Step 3.* Obtain a "refined" estimate of $\delta_g$ by fitting a smoothing spline.
+- *Step 4.* Apply the VST \(h_{nb}\) to \red{each gene} expression count.
+- *Step 5.* Compute the standardized summary statistics \(Z_{g}\) for each gene.
+- *Step 6.* Estimate the local false discovery rate locfdr for each gene.
+
+* Presentation outline
+- Background & Motivating data
+- Methodology
+  - MixEnrich
+  - kMEn
+  - iDEG
+    - Procedure
+    - @@html:<font color="#1b91ff"> Numerical studies</font>@@
+    - Real data analysis
+- Summary & future directions
+
+** Simulate a single-subject dataset
+#+ATTR_HTML: :align left
+Simulate a pair of transcriptomes:
+#+ATTR_HTML:  :style font-size:90%
+\begin{eqnarray*}
+  Y_{g1} &\sim& \text{NB}(\mu_{g1}, \delta_{g})\\
+  Y_{g2} &\sim& \text{NB}(\mu_{g2}, \delta_{g})\\ 
+  \delta_{g} &=& 0.005 + 9/(\mu_{g1}+100) \\
+P(\mu_{g1}) &=& \frac{1}{500} e^{-\frac{1}{500} \mu_{g1}} \quad \quad g = 1,\cdots,20\,000
+ \end{eqnarray*}
+
+** Simulate a single-subject dataset
+
+#+BEGIN_EXPORT html
+<div align="right"> 
+<font style="background-color:lightgray"> <i> Cont'd </i> </font>
+</div>
+#+END_EXPORT
+
+#+ATTR_HTML: :style font-size:90% 
+\begin{eqnarray*}
+\mu_{g2} &=& \begin{cases}
+\mu_{g1}  & \text{if }g \in \overline{\mathcal{G}},\\
+d^{s}\mu_{g1}   & \text{if }g \in \mathcal{G}.\end{cases}\\
+&&\text{where $\mathcal{G}$ is a random subset of set $\{1,2, \cdots, 20000\}$}\\
+\frac{|\mathcal{G}|}{|\mathcal{G}| + |\overline{\mathcal{G}}|} &=& 0.05 \label{eq:DEG-pct}\\
+d  &=& \frac{\mu_{g1} + n \sqrt{\mu_{g1}}}{\mu_{g1}}\label{eq:DEG-fold-change}\\
+s &=& \begin{cases} 1 &\text{with probability of }0.5,\\
+-1 &\text{with probability of }0.5.\end{cases} \label{eq:fold-change-direction}\\
+n &\sim& \mathcal{N}(9,1)
+\end{eqnarray*}
+
+** Simulation Procedure
+- **Step 1:** Simulate one single-subject dataset, which contains $p \%$ DEG. 
+- **Step 2:** Conduct iDEG, edgeR[fn:1:], DESeq[fn:2:], and DEGseq[fn:3:].
+- **Step 3:** Compute an F1 score for each method,
+# #+ATTR_HTML: :style font-size:90%
+# \begin{equation*}
+# F_{1} = \frac{2\times Precision \times Recall}{Precision + Recall}   
+# \end{equation*}
+- **Step 4:** Repeat Step1-Step3 for 1000 times
+- **Step 5:** Calculate the arithmetic mean and standard deviation of the 1000 $F_{1}$ resulted from each method.
+- **Step 6:** Change the value of $p$, repeat Step 1-Step 5
+
+#+BEGIN_EXPORT html
+<div class="reference"> 
+<br>
+<font ><hr></hr><sup>1. Robinson, M. D. et. al., 2010, <i>Bioinformatics</i>;  2. Anders, S. et. al., 2010, <i> Genome biology </i>;<br /> 3. Wang, L. et al., 2009, <i>Bioinformatics</i></sup> </font>
+</div>
+#+END_EXPORT
+
+** Performance evaluation--Poisson
+#+BEGIN_SRC R :exports none :results graphics :file ./Figures/fig-study1.png :session width :res 120 :height 550 :width 600 :eval no
+library(latex2exp)
+load('~/Dropbox/Qike/adaptive_cutoff/Figures/Fig_numericalStudy/Results/fig-num-study.RData', verbose = T)
+p_num_study <- ggplot(subset(p_num_study$data, data_dist =='Study 1'),
+                      aes(colour = Method,
+                          linetype = Method,
+                          y = Mean,
+                          x = DEG_prop)) +
+    geom_line(aes(group=Method)) +
+    ## geom_point()+
+    geom_errorbar(aes(ymax = Mean + se, ymin = Mean - se),
+                  width=0.2,
+                  linetype = 1,
+                  show.legend = F) +
+    ## ylim(.9,1)+
+    facet_grid(data_dist~., scales = 'free') +
+    labs(x = 'Percentage of DEG',
+         y = TeX('$F_{1}$  Score')) +
+    scale_x_discrete(labels = paste0(seq(5,20, 5), '%')) +
+    scale_linetype_manual(values=c('solid',  "dotdash",  "dashed", "longdash")) +
+    theme_bw(base_size = 15) + 
+    theme(legend.position = 'top',
+          strip.background = element_blank(),
+          strip.text = element_blank())
+p_num_study
+#+END_SRC
+
+#+RESULTS:
+[[file:./Figures/fig-study1.png]]
+
+[[./Figures/fig-study1.png]]
+** Performance eval--NB (varying $\scriptsize \delta_g$) 
+#+BEGIN_SRC R :exports none :results graphics :file ./Figures/fig-study2.png :session width :res 120 :height 550 :width 600 :eval no
+load('~/Dropbox/Qike/adaptive_cutoff/Figures/Fig_numericalStudy/Results/fig-num-study.RData', verbose = T)
+p_num_study <- ggplot(subset(p_num_study$data, data_dist =='Study 2'),
+                      aes(colour = Method,
+                          linetype = Method,
+                          y = Mean,
+                          x = DEG_prop)) +
+    geom_line(aes(group=Method)) +
+    ## geom_point()+
+    geom_errorbar(aes(ymax = Mean + se, ymin = Mean - se),
+                  width=0.2,
+                  linetype = 1,
+                  show.legend = F) +
+    ## ylim(.9,1)+
+    facet_grid(data_dist~., scales = 'free') +
+    labs(x = 'Percentage of DEG',
+         y = TeX('$F_{1}$  Score')) +
+    scale_x_discrete(labels = paste0(seq(5,20, 5), '%')) +
+    scale_linetype_manual(values=c('solid',  "dotdash",  "dashed", "longdash")) +
+    theme_bw(base_size = 15) + 
+    theme(legend.position = 'top',
+          strip.background = element_blank(),
+          strip.text = element_blank())
+p_num_study
+#+END_SRC
+
+#+RESULTS:
+[[file:./Figures/fig-study2.png]]
+
+[[./Figures/fig-study2.png]]
+
+** Performance eval--NB (constant $\scriptsize \delta_g$) 
+#+BEGIN_SRC R :exports none :results graphics :file ./Figures/fig-study3.png :session width :res 120 :height 550 :width 600 :eval 
+load('~/Dropbox/Qike/adaptive_cutoff/Figures/Fig_numericalStudy/Results/fig-num-study.RData', verbose = T)
+p_num_study <- ggplot(subset(p_num_study$data, data_dist =='Study 3'),
+                      aes(colour = Method,
+                          linetype = Method,
+                          y = Mean,
+                          x = DEG_prop)) +
+    geom_line(aes(group=Method)) +
+    ## geom_point()+
+    geom_errorbar(aes(ymax = Mean + se, ymin = Mean - se),
+                  width=0.2,
+                  linetype = 1,
+                  show.legend = F) +
+    ## ylim(.9,1)+
+    facet_grid(data_dist~., scales = 'free') +
+    labs(x = 'Percentage of DEG',
+         y = TeX('$F_{1}$  Score')) +
+    scale_x_discrete(labels = paste0(seq(5,20, 5), '%')) +
+    scale_linetype_manual(values=c('solid',  "dotdash",  "dashed", "longdash")) +
+    theme_bw(base_size = 15) + 
+    theme(legend.position = 'top',
+          strip.background = element_blank(),
+          strip.text = element_blank())
+p_num_study
+#+END_SRC
+
+#+RESULTS:
+[[file:./Figures/fig-study3.png]]
+
+[[./Figures/fig-study3.png]]
+
+** Operating characteristics 
+
+#+ATTR_HTML: :table rules="groups" :style font-size:40%
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+| DEG% | Method | Precision                                                 | Recall/TPR                                                 | FPR                      | F1                       | # Predicted DEG            |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|   5% | iDEG   | @@html:<font color="red">0.93</font>@@ (1.6\times10^{-2}) | @@html:<font color="red">0.679</font>@@ (2.5\times10^{-2}) | 0.003 (7.2\times10^{-4}) | 0.784 (1.5\times10^{-2}) | 730.482 (3.4\times10^{1})  |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | edgeR  | @@html:<font color="red">0.39</font>@@ (8.4\times10^{-3}) | @@html:<font color="red">0.948</font>@@ (7.1\times10^{-3}) | 0.078 (2.8\times10^{-3}) | 0.552 (8.6\times10^{-3}) | 2432.95 (5.4\times10^{1})  |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | DESeq  | 0.999 (2.1\times10^{-3})                                  | 0.152 (3.8\times10^{-2})                                   | 0 (1.8\times10^{-5})     | 0.262 (5.8\times10^{-2}) | 152.45 (3.8\times10^{1})   |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | DEGseq | 0.086 (6.7\times10^{-4})                                  | 0.985 (3.9\times10^{-3})                                   | 0.549 (3.9\times10^{-3}) | 0.159 (1.2\times10^{-3}) | 11408.61 (7.4\times10^{1}) |
+|  10% | iDEG   | 0.945 (1.1\times10^{-2})                                  | 0.708 (2.2\times10^{-2})                                   | 0.005 (1.1\times10^{-3}) | 0.809 (1.2\times10^{-2}) | 1500.32 (5.9\times10^{1})  |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | edgeR  | 0.447 (6.2\times10^{-3})                                  | 0.96 (4.3\times10^{-3})                                    | 0.132 (3.3\times10^{-3}) | 0.61 (6.0\times10^{-3})  | 4296.19 (6.0\times10^{1})  |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | DESeq  | 1 (0)                                                     | 0 (5.2\times10^{-4})                                       | 0 (0)                    | 0.002 (1.4\times10^{-3}) | 0.44 (1.0\times10^{0})     |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | DEGseq | 0.165 (1.1\times10^{-3})                                  | 0.986 (2.5\times10^{-3})                                   | 0.556 (4.2\times10^{-3}) | 0.282 (1.6\times10^{-3}) | 11974.99 (7.6\times10^{1}) |
+|  15% | iDEG   | 0.953 (7.0\times10^{-3})                                  | 0.746 (1.6\times10^{-2})                                   | 0.006 (1.1\times10^{-3}) | 0.837 (9.1\times10^{-3}) | 2348.99 (5.8\times10^{1})  |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | edgeR  | 0.537 (5.7\times10^{-3})                                  | 0.964 (3.7\times10^{-3})                                   | 0.147 (3.4\times10^{-3}) | 0.69 (4.8\times10^{-3})  | 5384.34 (5.9\times10^{1})  |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | DESeq  | 1 (NA)                                                    | 0 (3.3\times10^{-5})                                       | 0 (0)                    | 0.001 (NA)               | 0.01 (1.0\times10^{-1})    |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | DEGseq | 0.235 (1.4\times10^{-3})                                  | 0.986 (2.1\times10^{-3})                                   | 0.565 (4.2\times10^{-3}) | 0.38 (1.9\times10^{-3})  | 12562.45 (7.3\times10^{1}) |
+|  20% | iDEG   | 0.962 (4.6\times10^{-3})                                  | 0.763 (1.3\times10^{-2})                                   | 0.008 (1.0\times10^{-3}) | 0.851 (7.8\times10^{-3}) | 3175 (6.4\times10^{1})     |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | edgeR  | 0.602 (5.7\times10^{-3})                                  | 0.966 (2.8\times10^{-3})                                   | 0.16 (3.9\times10^{-3})  | 0.742 (4.4\times10^{-3}) | 6418.81 (6.4\times10^{1})  |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | DESeq  | NaN (NA)                                                  | 0 (0)                                                      | 0 (0)                    | NaN (NA)                 | 0 (0)                      |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+|      | DEGseq | 0.299 (1.6\times10^{-3})                                  | 0.986 (2.0\times10^{-3})                                   | 0.577 (4.2\times10^{-3}) | 0.459 (1.9\times10^{-3}) | 13179.58 (6.8\times10^{1}) |
+|------+--------+-----------------------------------------------------------+------------------------------------------------------------+--------------------------+--------------------------+----------------------------|
+
+#+REVEAL: split
+
+#+BEGIN_EXPORT html
+<div align="right"> 
+<font style="background-color:lightgray"> <i> Cont'd </i> </font>
+</div>
+#+END_EXPORT
+@@html:<br>@@
+#+ATTR_html: :style font-size:80% :align left
+Although the Recall/TPR and number of precisions of iDEG are lower than edgeR, iDEG has high precision and low FPR across all percentages of DEG. These operating characteristics of iDEG may be preferable in large-scale inference, like RNA-Seq analysis, where investigators examine tens of thousands of genes in a high-throughput manner.
+
+** Sensitivity Analysis
+
+#+ATTR_html: :align left
+Our experience indicates that without making assumptions on RNA-Seq data, it is difficult to construct suitable statistical inferences for a single-subject dataset. Nonetheless we test the two main assumptions we make:
+
+- The value of dispersion parameter is a function of expression mean.
+
+- The majority of the genes are null genes. 
+
+** Sensitivity Analysis
+
+  1. Draw  dispersion parameter $\delta_{g}$ from a uniform distribution, $\text{unif}(0.001, 0.1)$. 
+[[./Figures/fig-sensitivity-random.png]]
+
+** Sensitivity Analysis
+
+ 2. Simulate single-subject datasets with a series of percentages of DEG. 
+
+ [[./Figures/fig-sensitivity-highDEG.png]]
+
+* Presentation outline
+- Background & Motivating data
+- Methodology
+  - MixEnrich
+  - kMEn
+  - iDEG
+    - Procedure
+    - Numerical studies
+    - @@html:<font color="#1b91ff">Real data analysis</font>@@
+- Summary & future directions
+
+** Data 
+#+ATTR_HTML: :align left
+A transcriptome of tumor sample and a transcriptome of surrounding healthy sample of an African American woman with Triple negative breast cancer (TNBC). 
+
+#+ATTR_HTML: :align left :style font-size:85%
+TNBC is a subtype of breast cancer that has poor prognosis and considerable heterogeneity. It disproportionately affects women with African origin (Dietze et al., 2015). Personalized treatment may be successful for an African American TNBC patient if one could discover a set of her specific DEG and match some of these DEG to the targets of a therapeutic drug.
+** iDEG result
+#+CAPTION: The 10 top-hit (smallest local fdr) differentially expressed genes.
+#+NAME: table:tnbc
+| Gene    | local_fdr |      Z |
+|---------+-----------+--------|
+| ADIPOQ  |  2.85e-34 | -11.17 |
+| PLA2G2A |  2.85e-34 | -11.65 |
+| PI16    |  1.15e-33 | -10.78 |
+| LEP     |  2.25e-33 | -10.70 |
+| SFTPB   |  1.44e-32 | -10.59 |
+| IL33    |  4.24e-31 | -10.36 |
+| TUSC5   |  6.74e-31 | -10.32 |
+| CSF3    |  2.89e-29 | -10.04 |
+| COL6A6  |  3.24e-29 | -10.04 |
+| CCL21   |  1.99e-28 |  -9.90 |
+| ...     |       ... |    ... |
+** Some interesting genes
+
+#+ATTR_HTML: :style font-size:65%
+- *ADIPOQ* & *LEP*: Adiponectin (gene product of gene ADIPOQ) and leptin (gene product of LEP) are considered as mediators for the association of breast cancer with obesity, which is a major risk factor for breast cancer (Nalabolu et al., 2014; Grossmann et al., 2010).
+- *PLA2G2A*: Although PLA2G2A has not been extensively studied for breast cancer, many studies have shown that it inhibits invasion and metastasis of gastric and colon cancer (Ganesan et al., 2008; Movahedian et al., 2016; Fijneman et al., 2009) and may predict survival (Xing et al., 2011).
+- *TUSC5*: Bubnov et al. (2012) has demonstrated the down-regulation of TUSC5 induced by DNA methylation in breast cancer. In contrast to mutated genes, DNA methylation is reversible.
+* Presentation outline
+- Background & Motivating data
+- Methodology
+  - MixEnrich
+  - kMEn
+  - iDEG
+    - Procedure
+    - Numerical studies
+    - Real data analysis
+- @@html:<font color="#1b91ff">Summary & future directions</font>@@
+* Summary of contributions
+1. Development of a method to detect bidirectional pathway differential expression and is resistant to transcriptome background noise: MixEnrich
+2. Development of a nonparametric robust method to detect pathway differential expression: kMEn 
+3. Development of a gene differential expression testing procedure that can operate when sample size is one.
+4. Development of an R package of the methods.
+* Future directions
+- Extend the single-subject methods beyond the current Case-vs.-Baseline design.
+- Extend iDEG for gene-set analysis
+- Explore applications of single-subject methods in discovering the differences and similarities among patients.
+* Acknowledgements
+
+#+BEGIN_EXPORT html
+<div class="sliderow">
+
+<div class="leftcol">
+<br>
+<p align="left"> Committee members </p>
+<ul>
+<li> Jin Zhou</li>
+<li> Joseph W. Watkins</li>
+<li> Yves A. Lussier</li>
+<li> Hao Helen Zhang</li>
+</ul>
+</div>
+
+<div class="rightcol">
+
+<br>
+<ul>
+<li> Statistics GIDP</li>
+<li> The Lussier Group</li>
+<li> UofA Biostatistics</li>
+<li> My family</li>
+</ul>
+<br>
+<br>
+<img src="https://www.nsf.gov/images/logos/nsf1.jpg"  height="130" width="130"/> <font color="white">spa</font>
+<img src="https://www.nih.gov/sites/default/files/styles/sidebar_media_breakpoint-small/public/about-nih/2012-logo.png?itok=WGmazXcU"  height="130" width="130"/>
+<img src="http://grad.arizona.edu/ui/images/ua_lockups/gidp-lockup-full-white.png" height="100" width="400" style="background-color:gray" />
+</div>
+
+</div>
+#+END_EXPORT
+
+* 
+
+@@html:<br><br><br><br>@@
+Questions?
+* Backup slides
+** Performance eval--Poisson
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+| DEG% | Method | Precision       | Recall/TPR      | FPR             | F1              | # Predicted DEG   |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|   5% | iDEG   | 0.987 (5.0e-03) | 0.878 (1.4e-02) | 0.001 (2.4e-04) | 0.929 (6.9e-03) | 889.28 (1.6e+01)  |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | edgeR  | 0.919 (9.2e-03) | 0.934 (7.7e-03) | 0.004 (5.2e-04) | 0.926 (6.6e-03) | 1016.25 (1.2e+01) |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | DESeq  | NaN (NA)        | 0 (0.0e+00)     | 0 (0.0e+00)     | NaN (NA)        | 0 (0.0e+00)       |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | DEGseq | 0.903 (1.0e-02) | 0.942 (7.2e-03) | 0.005 (6.1e-04) | 0.922 (6.7e-03) | 1043.46 (1.3e+01) |
+|  10% | iDEG   | 0.989 (3.3e-03) | 0.902 (9.4e-03) | 0.001 (3.4e-04) | 0.944 (4.7e-03) | 1825.02 (2.2e+01) |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | edgeR  | 0.922 (6.2e-03) | 0.951 (4.8e-03) | 0.009 (7.7e-04) | 0.937 (4.1e-03) | 2063.76 (1.7e+01) |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | DESeq  | NaN (NA)        | 0 (0.0e+00)     | 0 (0.0e+00)     | NaN (NA)        | 0 (0.0e+00)       |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | DEGseq | 0.907 (6.5e-03) | 0.96 (4.0e-03)  | 0.011 (8.4e-04) | 0.932 (4.0e-03) | 2116.16 (1.7e+01) |
+|  15% | iDEG   | 0.99 (2.7e-03)  | 0.912 (7.2e-03) | 0.002 (4.5e-04) | 0.949 (3.6e-03) | 2761.82 (2.6e+01) |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | edgeR  | 0.926 (4.3e-03) | 0.958 (3.7e-03) | 0.014 (8.5e-04) | 0.942 (3.0e-03) | 3105.45 (1.8e+01) |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | DESeq  | NaN (NA)        | 0 (0.0e+00)     | 0 (0.0e+00)     | NaN (NA)        | 0 (0.0e+00)       |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | DEGseq | 0.91 (4.9e-03)  | 0.966 (3.2e-03) | 0.017 (1.0e-03) | 0.937 (3.1e-03) | 3187.71 (2.0e+01) |
+|  20% | iDEG   | 0.991 (2.0e-03) | 0.921 (6.0e-03) | 0.002 (4.7e-04) | 0.955 (3.0e-03) | 3714.22 (2.8e+01) |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | edgeR  | 0.93 (4.4e-03)  | 0.964 (2.9e-03) | 0.018 (1.2e-03) | 0.946 (2.6e-03) | 4145.66 (2.4e+01) |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | DESeq  | NaN (NA)        | 0 (0.0e+00)     | 0 (0.0e+00)     | NaN (NA)        | 0 (0.0e+00)       |
+|------+--------+-----------------+-----------------+-----------------+-----------------+-------------------|
+|      | DEGseq | 0.913 (4.6e-03) | 0.971 (2.4e-03) | 0.023 (1.4e-03) | 0.941 (2.7e-03) | 4254.62 (2.5e+01) |
+
+** Performance eval--NB(constant $\scriptsize \delta_g$)
+#+ATTR_HTML: :table rules="groups" :style font-size:45%
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+| DEG% | Method | Precision                 | Recall/TPR                | FPR                       | F1                        | # Predicted DEG |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|   5% | iDEG   | 0.957 (1.0\times 10^{-2}) | 0.733 (1.9\times 10^{-2}) | 0.002 (4.7\times 10^{-4}) | 0.83 (1.1\times 10^{-2})  | 765.73 (26)     |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | edgeR  | 0.532 (1.1\times 10^{-2}) | 0.935 (7.7\times 10^{-3}) | 0.043 (1.9\times 10^{-3}) | 0.678 (9.0\times 10^{-3}) | 1759.67 (39)    |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | DESeq  | 1 (0)                     | 0.07 (3.6\times 10^{-2})  | 0 (0)                     | 0.131 (6.1\times 10^{-2}) | 70.35 (36)      |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | DEGseq | 0.102 (9.0\times 10^{-4}) | 0.985 (3.9\times 10^{-3}) | 0.459 (4.4\times 10^{-3}) | 0.184 (1.5\times 10^{-3}) | 9698.75 (85)    |
+|  10% | iDEG   | 0.966 (8.2\times 10^{-3}) | 0.78 (1.9\times 10^{-2})  | 0.003 (8.2\times 10^{-4}) | 0.863 (9.7\times 10^{-3}) | 1615.71 (50)    |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | edgeR  | 0.639 (8.8\times 10^{-3}) | 0.947 (5.2\times 10^{-3}) | 0.06 (2.3\times 10^{-3})  | 0.763 (6.8\times 10^{-3}) | 2966.41 (42)    |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | DESeq  | NA (NA)                   | 0 (0)                     | 0 (0)                     | NA (NA)                   | 0 (0)           |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | DEGseq | 0.19 (1.6\times 10^{-3})  | 0.986 (2.8\times 10^{-3}) | 0.468 (4.5\times 10^{-3}) | 0.318 (2.3\times 10^{-3}) | 10394.48 (80)   |
+|  15% | iDEG   | 0.969 (5.1\times 10^{-3}) | 0.814 (1.5\times 10^{-2}) | 0.005 (8.3\times 10^{-4}) | 0.884 (7.7\times 10^{-3}) | 2519.36 (54)    |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | edgeR  | 0.699 (7.2\times 10^{-3}) | 0.954 (4.1\times 10^{-3}) | 0.073 (2.5\times 10^{-3}) | 0.807 (5.2\times 10^{-3}) | 4098.27 (44)    |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | DESeq  | NA (NA)                   | 0 (0)                     | 0 (0)                     | NA (NA)                   | 0 (0)           |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | DEGseq | 0.266 (2.1\times 10^{-3}) | 0.987 (2.1\times 10^{-3}) | 0.48 (5.0\times 10^{-3})  | 0.419 (2.6\times 10^{-3}) | 11127.73 (86)   |
+|  20% | iDEG   | 0.974 (4.2\times 10^{-3}) | 0.828 (1.5\times 10^{-2}) | 0.006 (1.0\times 10^{-3}) | 0.895 (7.8\times 10^{-3}) | 3401.67 (74)    |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | edgeR  | 0.741 (6.0\times 10^{-3}) | 0.96 (3.2\times 10^{-3})  | 0.084 (2.6\times 10^{-3}) | 0.836 (4.1\times 10^{-3}) | 5181.78 (45)    |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
+|      | DESeq  | NA (NA)                   | 0 (0)                     | 0 (0)                     | NA (NA)                   | 0 (0)           |
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|   
+|      | DEGseq | 0.333 (2.3\times 10^{-3}) | 0.987 (1.9\times 10^{-3}) | 0.494 (5.0\times 10^{-3}) | 0.498 (2.6\times 10^{-3}) | 11857.92 (80)   |
