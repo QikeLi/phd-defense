@@ -43,7 +43,7 @@
 #+REVEAL_MULTIPLEX_SOCKETIO_URL:
 #+REVEAL_SLIDE_HEADER:
 #+REVEAL_SLIDE_FOOTER:
-#+REVEAL_PLUGINS: (classList markdown highlight zoom notes multiplex)
+#+REVEAL_PLUGINS: (classList markdown highlight zoom notes multiplex print-pdf)
 #+REVEAL_DEFAULT_FRAG_STYLE:
 # #+REVEAL_INIT_SCRIPT: { src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize(); toc_progress.create(); } }
 #+REVEAL_HIGHLIGHT_CSS: %r/lib/css/zenburn.css
@@ -60,12 +60,11 @@
 (custom-set-variables '(org-reveal-external-plugins '((toc-progress . "{src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize(); toc_progress.create(); }}") ))) 
 #+END_SRC
 
-
 ** New Statistical Methods of  @@html:<br>@@ Single-subject Transcriptome Analysis for Precision Medicine
 
-    #+BEGIN_EXPORT html
-    <hr class="shadow">
-    #+END_EXPORT
+    # #+BEGIN_EXPORT html
+    # <hr class="shadow">
+    # #+END_EXPORT
 Qike Li 
 #+ATTR_HTML: :style font-size:70% 
 Lussier Group\\
@@ -104,13 +103,70 @@ Biomedical informatics advisor: Dr. Yves A. Lussier
 # - Main Challenges
 # - Our solution (iDEG)
 ** Precision Medicine 
-#+ATTR_HTML: :align center 
-   [[./Figures/PGX.jpg]]  
- 
+#+ATTR_HTML: :align center :width 50% :height 50%    
+   [[./Figures/Precision_Medicine.png]]
 ** Single-subject analysis
 @@html:<br><br>@@
- #+ATTR_HTML: :style background-color:lightgray
+ # #+ATTR_HTML: :style background-color:lightgray
   @@html:<span class="fragment highlight-blue">@@Single-subject analysis@@html:</span>@@ studies  @@html:<span class="fragment highlight-blue">@@one patient@@html:</span>@@ at a time, with the purpose of revealing the  @@html:<span class="fragment highlight-blue">@@patient-specific@@html:</span>@@ disease mechanisms for highly heterogeneous diseases.
+** Single-subject analysis
+#+ATTR_HTML: :align left 
+_Strategies:_
+#+ATTR_HTML: :style font-size:80% 
+1. Using only one disease tissue sample
+  - FAIME[fn:1]
+  - ssGSEA[fn:2]
+#+BEGIN_EXPORT html
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Yang, X. et. al., 2012, <i> PLoS Comput Biol </i> </li>
+<li style="font-size:85%"> Barbie, DA. et al., 2009, <i>Nature</i></li>
+</ol>
+</div>
+#+END_EXPORT
+** Single-subject analysis
+#+ATTR_HTML: :align left 
+_Strategies:_
+#+ATTR_HTML: :style font-size:80% 
+2. [@2] Using reference transcriptome
+  - Pathifier[fn:1]
+  - individPath[fn:2]
+#+BEGIN_EXPORT html
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Drier, Y. et. al., 2013, <i> Proc Natl Acad Sci</i> </li>
+<li style="font-size:85%"> Wang, H. et al., 2016, <i>Biref Bioinform</i></li>
+</ol>
+</div>
+#+END_EXPORT
+** Single-subject analysis
+#+ATTR_HTML: :align left 
+_Strategies:_
+#+ATTR_HTML: :style font-size:80% 
+3. [@3] Using two matched transcriptomes (e.g, disease vs. healthy tissue samples)
+  - @@html:N-of-1-<i>pathways</i> Wilcoxon@@[fn:1]
+  - @@html:N-of-1-<i>pathways</i> Mahalanobis Distance@@[fn:2]
+#+BEGIN_EXPORT html
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Gardeux, V. et. al., 2014, <i> JAMIA</i> </li>
+<li style="font-size:85%"> Schissler, AG. et al., 2015, <i>Bioinformatics</i></li>
+</ol>
+</div>
+#+END_EXPORT
+
 ** Single-subject analysis
  #+ATTR_HTML: :align right
  [[./Figures/single-subject-analysis2.png]]
@@ -174,11 +230,9 @@ From two matched transcriptomes, identify *patient-specific* molecular defects a
  -  @@html:<u>d</u>@@ifferentially @@html:<u>e</u>@@xpressed @@html:<u>g</u>@@enes (DEG) 
 ** Main Challenges
 
-#+ATTR_HTML: :align left
-Main challenges in single-subject transcriptome analysis:
-- "Single-subject Single-observation", i.e., sample size is *1*.
+- "Single-subject Single-observation" (sample size = *1*)
   - Different genes have different variances. 
-  - For each gene, we have only two numbers to work with.
+  - only two numbers for each gene
 
 #+BEGIN_SRC R :exports results :results graphics :file ./Figures/fig-tnbc.png :session :eval no
 base_size <- 20
@@ -260,22 +314,53 @@ To identify DEG:
     - Numerical studies
     - Real data analysis
 - Summary & future directions
-** Gaol 
-@@html:<br>@@
-#+ATTR_HTML: :align left 
-Identify differentially expressed pathways from two matched transcriptomes (e.g., tumor vs. healthy sample).  
-** Limitations of existing methods
-- Existing methods:
-  - @@html:N-of-1-<i>pathways</i> Wilcoxon@@
-  - @@html:N-of-1-<i>pathways</i> MD@@
-- Their limitations:
-  - Cannot identify dysregulated pathways if genes in the pathway are regulated in opposing directions
-  - Yield high false positive rate when background noise is present
-** Approach
-@@html:<br>@@
-[[./Figures/MixEnrich-outline.png]]
+
+** @@html:N-of-1-<i>pathways</i> MixEnrich@@
+#+ATTR_HTML: :style font-size:80% 
+- *Motivation*
+  #+ATTR_HTML: :style font-size:70% 
+  - Bidirectional pathway differential expression
+  - Background noise
+- *Goal* 
+  #+ATTR_HTML: :style font-size:70% 
+  - Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy).  
+- *Method*
+  #+ATTR_HTML: :style font-size:70% 
+  - Step1: Gaussian mixture model to cluster genes
+  - Step2: FET
+- *Results*
+  #+ATTR_HTML: :style font-size:70% 
+  - Simulation: higher precision and recall (bidirectional dysregulated, background noise)
+  - Head and neck cancer: compatible performance as conventional methods with more samples.
 ** Publication
-[[./Figures/mixenrich-paper.png]]
+#+BEGIN_EXPORT html
+<div class="sliderow">
+
+<div class="leftcol">
+<br>
+<img src="./Figures/mixenrich-paper.png" style="float:left;width:100%;height:100%;" align="center"/>
+</div>
+
+<div class="rightcol">
+
+<br>
+<ul style="font-size:75%">
+<li> R package<sup>1</sup></li>
+<li> Presented at Translational Bioinformatics Conference 2016</li>
+<li> Berghout, Joanne*, <u>Qike Li</u>*, Nima Pouladi, Yves Lussier,  submitted to <i>Pacific Symposium on Biocomputing</i> (* joint first authorship)</li>
+
+</ul>
+
+<br>
+<div class="reference"> 
+<font style="font-size:75%"><hr></hr><sup>1. www.lussiergroup.org/publications/N-of-1-pathways</sup> </font>
+</div>
+
+</div>
+
+</div>
+#+END_EXPORT
+
 * Presentation outline
 - Background & Motivating data
 - Methodology
@@ -287,23 +372,67 @@ Identify differentially expressed pathways from two matched transcriptomes (e.g.
     - Real data analysis
 - Summary & future directions
 
-** Gaol 
+** @@html:N-of-1-<i>pathways</i> kMEn@@
+#+ATTR_HTML: :style font-size:80% 
+- *Motivation*
+  #+ATTR_HTML: :style font-size:70% 
+  - Relax the Gaussian assumption of MixEnrich
+- *Goal* 
+  #+ATTR_HTML: :style font-size:70% 
+  - Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy).  
+- *Method*
+  #+ATTR_HTML: :style font-size:70% 
+  - Step1: k-means
+  - Step2: FET
+- *Results*
+  #+ATTR_HTML: :style font-size:70% 
+  - Simulation: high AUC
+  - HIV treatment dataset: correlates with CD4 counts
+** Methods comparison
 @@html:<br>@@
-#+ATTR_HTML: :align left
-Provide a robust model to identify differentially expressed pathways from a pair of transcriptomes (e.g., tumor vs. healthy sample)  
-** Approach
-@@html:<br>@@
-[[./Figures/kMEn-outline.png]]
+[[./Figures/table3-1.png]]
 ** Publication
-[[./Figures/kmen-paper.png]]
 
+#+BEGIN_EXPORT html
+<div class="sliderow">
+
+<div class="leftcol">
+<br>
+<img src="./Figures/kmen-paper.png" style="float:left;width:100%;height:100%;" align="center"/>
+</div>
+
+<div class="rightcol">
+
+<br>
+<ul style="font-size:75%">
+<li> R package<sup>1</sup></li>
+
+<li> Zaim, Samir *, <u>Qike Li*</u>, et.al, submitted
+to <i>Pacific Symposium on Biocomputing</i> (* joint first authorship)</li>
+
+</ul>
+
+<br><br><br><br><br>
+<div class="reference"> 
+<font style="font-size:75%"><hr></hr><sup>1. www.lussiergroup.org/publications/N-of-1-pathways</sup> </font>
+</div>
+
+</div>
+
+</div>
+#+END_EXPORT
+** More contributions to DEP study
+  #+ATTR_HTML: :style font-size:60% 
+- Vitali, Francesca, _Qike Li_, A. Grant Schissler, et. al., “Developing a ‘personalome’ for precision medicine: emerging methods that unveil clinically-interpretable effect sizes from single-subject omics”  /Briefings of Bioinformatics/ (under revision)
+- Schissler, A. Grant*, Vincent Gardeux*, _Qike Li*_, et. al,, “Dynamic changes of RNA-sequencing expression for precision medicine: N-of-1-pathways Mahalanobis distance within pathways of single subjects predicts breast cancer survival”, Bioinformatics 31, 12 (2015). (* joint first authorship)
+- Schissler, A. Grant*, _Qike Li*_, James L. Chen, et. al., “Analysis of aggregated cell–cell statistical distances within pathways unveils therapeutic-resistance mechanisms in circulating tumor cells”, Bioinformatics 32, 12 (2016). (* joint first authorship)
 * Presentation outline
 - Background & Motivating data
 - Methodology
   - MixEnrich
   - kMEn
   - @@html:<font color="#1b91ff">iDEG</font>@@
-     #+ATTR_REVEAL: :frag (highlight-blue none none)
+    #+ATTR_REVEAL: :frag (highlight-blue none none)
     - Procedure
       - Poisson case
       - negative binomial case
@@ -311,7 +440,7 @@ Provide a robust model to identify differentially expressed pathways from a pair
     - Real data analysis
 - Summary & future directions
 
-** Gaol
+** Goal
 @@html:<br>@@
 #+ATTR_HTML: :align left :style font-size:90%
 Identify a set of patient-specific differentially expressed genes (DEGs) from two matched transcriptomes.
@@ -344,16 +473,9 @@ print(table_tnbc_A2C9_print, type = 'org')
 |--------+-----------------+---------------------|
 | /      |               < |                     |
 | A1BG   |              92 |                  72 |
-| A1CF   |               1 |                   0 |
-| A2BP1  |               0 |                   2 |
-| A2LD1  |             127 |                  71 |
-| A2ML1  |             773 |                  12 |
-| A2M    |           11825 |               29385 |
 | A4GALT |             871 |                 891 |
-| A4GNT  |               1 |                   5 |
-| AAA1   |               0 |                   0 |
-| AAAS   |             414 |                 460 |
 | ...    |             ... |                 ... |
+| 
 |--------+-----------------+---------------------|
 
 ** Modeling RNA data--Poisson
@@ -986,7 +1108,8 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 
 
 ** Future directions
-#+ATTR_HTML: :table rules="groups" :style font-size:70%
+#+ATTR_HTML: 
+@@html:<br>@@
 - Extend the single-subject methods beyond the current Case-vs.-Baseline design.
 - Extend iDEG for gene-set analysis
 - Explore applications of single-subject methods in discovering the differences and similarities among patients.

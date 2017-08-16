@@ -32,10 +32,9 @@
 <div class="slides">
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org741e86e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orge1f4b9f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org741e86e">New Statistical Methods of  <br> Single-subject Transcriptome Analysis for Precision Medicine</h3>
-<hr class="shadow">
+<h3 id="orge1f4b9f">New Statistical Methods of  <br> Single-subject Transcriptome Analysis for Precision Medicine</h3>
 <p>
 Qike Li 
 </p>
@@ -70,9 +69,9 @@ Biomedical informatics advisor: Dr. Yves A. Lussier
 </section>
 </section>
 <section>
-<section id="slide-orgf3bd910" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgea788e4" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="orgf3bd910">Presentation outline</h2>
+<h2 id="orgea788e4">Presentation outline</h2>
 <ul>
 <li class="fragment highlight-blue">Background &amp; Motivating data</li>
 <li>Methodology
@@ -93,31 +92,113 @@ Biomedical informatics advisor: Dr. Yves A. Lussier
 </ul>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgea98fc4" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orga717092" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgea98fc4">Precision Medicine</h3>
+<h3 id="orga717092">Precision Medicine</h3>
 
 <div class="figure">
-<p><img src="./Figures/PGX.jpg" alt="PGX.jpg" align="center" />  
+<p><img src="./Figures/Precision_Medicine.png" alt="Precision_Medicine.png" align="center" width="50%" height="50%" />
 </p>
 </div>
-
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org3ccaa8f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org8a8b471" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org3ccaa8f">Single-subject analysis</h3>
+<h3 id="org8a8b471">Single-subject analysis</h3>
 <p>
 <br><br>
 </p>
-<p style="background-color:lightgray">
+
+<p>
 <span class="fragment highlight-blue">Single-subject analysis</span> studies  <span class="fragment highlight-blue">one patient</span> at a time, with the purpose of revealing the  <span class="fragment highlight-blue">patient-specific</span> disease mechanisms for highly heterogeneous diseases.
 </p>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org984fb6f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgb32c43d" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org984fb6f">Single-subject analysis</h3>
+<h3 id="orgb32c43d">Single-subject analysis</h3>
+<p align="left">
+<span class="underline">Strategies:</span>
+</p>
+<ol style="font-size:80%">
+<li>Using only one disease tissue sample
+<ul>
+<li>FAIME<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></li>
+<li>ssGSEA<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></li>
+
+</ul></li>
+
+</ol>
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Yang, X. et. al., 2012, <i> PLoS Comput Biol </i> </li>
+<li style="font-size:85%"> Barbie, DA. et al., 2009, <i>Nature</i></li>
+</ol>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org8c514f1" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org8c514f1">Single-subject analysis</h3>
+<p align="left">
+<span class="underline">Strategies:</span>
+</p>
+<ol style="font-size:80%">
+<li value="2">Using reference transcriptome
+<ul>
+<li>Pathifier<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup></li>
+<li>individPath<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></li>
+
+</ul></li>
+
+</ol>
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Drier, Y. et. al., 2013, <i> Proc Natl Acad Sci</i> </li>
+<li style="font-size:85%"> Wang, H. et al., 2016, <i>Biref Bioinform</i></li>
+</ol>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org4a5671f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org4a5671f">Single-subject analysis</h3>
+<p align="left">
+<span class="underline">Strategies:</span>
+</p>
+<ol style="font-size:80%">
+<li value="3">Using two matched transcriptomes (e.g, disease vs. healthy tissue samples)
+<ul>
+<li>N-of-1-<i>pathways</i> Wilcoxon<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup></li>
+<li>N-of-1-<i>pathways</i> Mahalanobis Distance<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></li>
+
+</ul></li>
+
+</ol>
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Gardeux, V. et. al., 2014, <i> JAMIA</i> </li>
+<li style="font-size:85%"> Schissler, AG. et al., 2015, <i>Bioinformatics</i></li>
+</ol>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org67263ac" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org67263ac">Single-subject analysis</h3>
 
 <div class="figure">
 <p><img src="./Figures/single-subject-analysis2.png" alt="single-subject-analysis2.png" align="right" />
@@ -125,9 +206,9 @@ Biomedical informatics advisor: Dr. Yves A. Lussier
 </div>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org2e4753e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org873367e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org2e4753e">Example RNA-Seq quantified mRNA expression data (Single-Subject)</h3>
+<h3 id="org873367e">Example RNA-Seq quantified mRNA expression data (Single-Subject)</h3>
 <p>
 <br>
 </p>
@@ -233,9 +314,9 @@ Biomedical informatics advisor: Dr. Yves A. Lussier
 </div>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgb58c422" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org973ffdd" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgb58c422">Our goal</h3>
+<h3 id="org973ffdd">Our goal</h3>
 <p style="font-size:95%" align="left">
 From two matched transcriptomes, identify <b>patient-specific</b> molecular defects and cellular processes leading to a patient's pathology:
 </p>
@@ -246,17 +327,14 @@ From two matched transcriptomes, identify <b>patient-specific</b> molecular defe
 </ul>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgd6d2ee1" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org9165d2b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgd6d2ee1">Main Challenges</h3>
-<p align="left">
-Main challenges in single-subject transcriptome analysis:
-</p>
+<h3 id="org9165d2b">Main Challenges</h3>
 <ul>
-<li>"Single-subject Single-observation", i.e., sample size is <b>1</b>.
+<li>"Single-subject Single-observation" (sample size = <b>1</b>)
 <ul>
 <li>Different genes have different variances.</li>
-<li>For each gene, we have only two numbers to work with.</li>
+<li>only two numbers for each gene</li>
 
 </ul></li>
 
@@ -264,15 +342,15 @@ Main challenges in single-subject transcriptome analysis:
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgca8e0b0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org9f9bde4" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgca8e0b0">Our solutions</h3>
+<h3 id="org9f9bde4">Our solutions</h3>
 <p align="left">
 To identify DEP:
 </p>
 <ul>
-<li>N-of-1-<i>pathways</i> MixEnrich<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></li>
-<li>N-of-1-<i>pathways</i> kMEn<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></li>
+<li>N-of-1-<i>pathways</i> MixEnrich<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup></li>
+<li>N-of-1-<i>pathways</i> kMEn<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></li>
 
 </ul>
 <p align="left">
@@ -296,9 +374,9 @@ To identify DEG:
 </section>
 </section>
 <section>
-<section id="slide-org3670fe0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org2e8c515" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="org3670fe0">Presentation outline</h2>
+<h2 id="org2e8c515">Presentation outline</h2>
 <ul>
 <li>Background &amp; Motivating data</li>
 <li>Methodology
@@ -317,63 +395,76 @@ To identify DEG:
 <li>Summary &amp; future directions</li>
 
 </ul>
+
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org0fa9995" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org064f329" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org0fa9995">Gaol</h3>
-<p>
-<br>
-</p>
-<p align="left">
-Identify differentially expressed pathways from two matched transcriptomes (e.g., tumor vs. healthy sample).  
-</p>
-<div class="slide-footer"></div>
-</section>
-<section id="slide-org0996983" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
-<div class="slide-header"></div>
-<h3 id="org0996983">Limitations of existing methods</h3>
-<ul>
-<li>Existing methods:
-<ul>
-<li>N-of-1-<i>pathways</i> Wilcoxon</li>
-<li>N-of-1-<i>pathways</i> MD</li>
+<h3 id="org064f329">N-of-1-<i>pathways</i> MixEnrich</h3>
+<ul style="font-size:80%">
+<li><b>Motivation</b>
+<ul style="font-size:70%">
+<li>Bidirectional pathway differential expression</li>
+<li>Background noise</li>
 
 </ul></li>
-<li>Their limitations:
-<ul>
-<li>Cannot identify dysregulated pathways if genes in the pathway are regulated in opposing directions</li>
-<li>Yield high false positive rate when background noise is present</li>
+<li><b>Goal</b> 
+<ul style="font-size:70%">
+<li>Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy).</li>
+
+</ul></li>
+<li><b>Method</b>
+<ul style="font-size:70%">
+<li>Step1: Gaussian mixture model to cluster genes</li>
+<li>Step2: FET</li>
+
+</ul></li>
+<li><b>Results</b>
+<ul style="font-size:70%">
+<li>Simulation: higher precision and recall (bidirectional dysregulated, background noise)</li>
+<li>Head and neck cancer: compatible performance as conventional methods with more samples.</li>
 
 </ul></li>
 
 </ul>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orge4e8fc4" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org76fba2f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orge4e8fc4">Approach</h3>
-<p>
-<br>
-<img src="./Figures/MixEnrich-outline.png" alt="MixEnrich-outline.png" />
-</p>
-<div class="slide-footer"></div>
-</section>
-<section id="slide-orgb575f59" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
-<div class="slide-header"></div>
-<h3 id="orgb575f59">Publication</h3>
+<h3 id="org76fba2f">Publication</h3>
+<div class="sliderow">
 
-<div class="figure">
-<p><img src="./Figures/mixenrich-paper.png" alt="mixenrich-paper.png" />
-</p>
+<div class="leftcol">
+<br>
+<img src="./Figures/mixenrich-paper.png" style="float:left;width:100%;height:100%;" align="center"/>
 </div>
+
+<div class="rightcol">
+
+<br>
+<ul style="font-size:75%">
+<li> R package<sup>1</sup></li>
+<li> Presented at Translational Bioinformatics Conference 2016</li>
+<li> Berghout, Joanne*, <u>Qike Li</u>*, Nima Pouladi, Yves Lussier,  submitted to <i>Pacific Symposium on Biocomputing</i> (* joint first authorship)</li>
+
+</ul>
+
+<br>
+<div class="reference"> 
+<font style="font-size:75%"><hr></hr><sup>1. www.lussiergroup.org/publications/N-of-1-pathways</sup> </font>
+</div>
+
+</div>
+
+</div>
+
 <div class="slide-footer"></div>
 </section>
 </section>
 <section>
-<section id="slide-orga774c5d" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgfee1920" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="orga774c5d">Presentation outline</h2>
+<h2 id="orgfee1920">Presentation outline</h2>
 <ul>
 <li>Background &amp; Motivating data</li>
 <li>Methodology
@@ -395,42 +486,92 @@ Identify differentially expressed pathways from two matched transcriptomes (e.g.
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgdacf2d6" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org1e5ae45" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgdacf2d6">Gaol</h3>
-<p>
-<br>
-</p>
-<p align="left">
-Provide a robust model to identify differentially expressed pathways from a pair of transcriptomes (e.g., tumor vs. healthy sample)  
-</p>
-<div class="slide-footer"></div>
-</section>
-<section id="slide-orgeb6a5ed" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
-<div class="slide-header"></div>
-<h3 id="orgeb6a5ed">Approach</h3>
-<p>
-<br>
-<img src="./Figures/kMEn-outline.png" alt="kMEn-outline.png" />
-</p>
-<div class="slide-footer"></div>
-</section>
-<section id="slide-org5be3489" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
-<div class="slide-header"></div>
-<h3 id="org5be3489">Publication</h3>
+<h3 id="org1e5ae45">N-of-1-<i>pathways</i> kMEn</h3>
+<ul style="font-size:80%">
+<li><b>Motivation</b>
+<ul style="font-size:70%">
+<li>Relax the Gaussian assumption of MixEnrich</li>
 
-<div class="figure">
-<p><img src="./Figures/kmen-paper.png" alt="kmen-paper.png" />
+</ul></li>
+<li><b>Goal</b> 
+<ul style="font-size:70%">
+<li>Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy).</li>
+
+</ul></li>
+<li><b>Method</b>
+<ul style="font-size:70%">
+<li>Step1: k-means</li>
+<li>Step2: FET</li>
+
+</ul></li>
+<li><b>Results</b>
+<ul style="font-size:70%">
+<li>Simulation: high AUC</li>
+<li>HIV treatment dataset: correlates with CD4 counts</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org9b9f2cc" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org9b9f2cc">Methods comparison</h3>
+<p>
+<br>
+<img src="./Figures/table3-1.png" alt="table3-1.png" />
 </p>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgae4023d" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgae4023d">Publication</h3>
+<div class="sliderow">
+
+<div class="leftcol">
+<br>
+<img src="./Figures/kmen-paper.png" style="float:left;width:100%;height:100%;" align="center"/>
 </div>
 
+<div class="rightcol">
+
+<br>
+<ul style="font-size:75%">
+<li> R package<sup>1</sup></li>
+
+<li> Zaim, Samir *, <u>Qike Li*</u>, et.al, submitted
+to <i>Pacific Symposium on Biocomputing</i> (* joint first authorship)</li>
+
+</ul>
+
+<br><br><br><br><br>
+<div class="reference"> 
+<font style="font-size:75%"><hr></hr><sup>1. www.lussiergroup.org/publications/N-of-1-pathways</sup> </font>
+</div>
+
+</div>
+
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org3640665" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org3640665">More contributions to DEP study</h3>
+<ul style="font-size:60%">
+<li>Vitali, Francesca, <span class="underline">Qike Li</span>, A. Grant Schissler, et. al., “Developing a ‘personalome’ for precision medicine: emerging methods that unveil clinically-interpretable effect sizes from single-subject omics”  <i>Briefings of Bioinformatics</i> (under revision)</li>
+<li>Schissler, A. Grant*, Vincent Gardeux*, <span class="underline">Qike Li*</span>, et. al,, “Dynamic changes of RNA-sequencing expression for precision medicine: N-of-1-pathways Mahalanobis distance within pathways of single subjects predicts breast cancer survival”, Bioinformatics 31, 12 (2015). (* joint first authorship)</li>
+<li>Schissler, A. Grant*, <span class="underline">Qike Li*</span>, James L. Chen, et. al., “Analysis of aggregated cell–cell statistical distances within pathways unveils therapeutic-resistance mechanisms in circulating tumor cells”, Bioinformatics 32, 12 (2016). (* joint first authorship)</li>
+
+</ul>
 <div class="slide-footer"></div>
 </section>
 </section>
 <section>
-<section id="slide-org3070891" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org623da38" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="org3070891">Presentation outline</h2>
+<h2 id="org623da38">Presentation outline</h2>
 <ul>
 <li>Background &amp; Motivating data</li>
 <li>Methodology
@@ -457,9 +598,9 @@ Provide a robust model to identify differentially expressed pathways from a pair
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org3547ff5" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orge478f95" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org3547ff5">Gaol</h3>
+<h3 id="orge478f95">Goal</h3>
 <p>
 <br>
 </p>
@@ -469,9 +610,9 @@ Identify a set of patient-specific differentially expressed genes (DEGs) from tw
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgf2f220d" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org17deaf0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgf2f220d">Example RNA-Seq quantified mRNA expression data (Single-Subject)</h3>
+<h3 id="org17deaf0">Example RNA-Seq quantified mRNA expression data (Single-Subject)</h3>
 <p>
 <br>
 </p>
@@ -483,91 +624,46 @@ Identify a set of patient-specific differentially expressed genes (DEGs) from tw
 </colgroup>
 
 <colgroup>
-<col  class="org-right" />
+<col  class="org-left" />
 
-<col  class="org-right" />
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
 <th scope="col" class="org-left">Gene</th>
-<th scope="col" class="org-right">Case expression</th>
-<th scope="col" class="org-right">Baseline expression</th>
+<th scope="col" class="org-left">Case expression</th>
+<th scope="col" class="org-left">Baseline expression</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="org-left">A1BG</td>
-<td class="org-right">92</td>
-<td class="org-right">72</td>
-</tr>
-
-<tr>
-<td class="org-left">A1CF</td>
-<td class="org-right">1</td>
-<td class="org-right">0</td>
-</tr>
-
-<tr>
-<td class="org-left">A2BP1</td>
-<td class="org-right">0</td>
-<td class="org-right">2</td>
-</tr>
-
-<tr>
-<td class="org-left">A2LD1</td>
-<td class="org-right">127</td>
-<td class="org-right">71</td>
-</tr>
-
-<tr>
-<td class="org-left">A2ML1</td>
-<td class="org-right">773</td>
-<td class="org-right">12</td>
-</tr>
-
-<tr>
-<td class="org-left">A2M</td>
-<td class="org-right">11825</td>
-<td class="org-right">29385</td>
+<td class="org-left">92</td>
+<td class="org-left">72</td>
 </tr>
 
 <tr>
 <td class="org-left">A4GALT</td>
-<td class="org-right">871</td>
-<td class="org-right">891</td>
-</tr>
-
-<tr>
-<td class="org-left">A4GNT</td>
-<td class="org-right">1</td>
-<td class="org-right">5</td>
-</tr>
-
-<tr>
-<td class="org-left">AAA1</td>
-<td class="org-right">0</td>
-<td class="org-right">0</td>
-</tr>
-
-<tr>
-<td class="org-left">AAAS</td>
-<td class="org-right">414</td>
-<td class="org-right">460</td>
+<td class="org-left">871</td>
+<td class="org-left">891</td>
 </tr>
 
 <tr>
 <td class="org-left">&#x2026;</td>
-<td class="org-right">&#x2026;</td>
-<td class="org-right">&#x2026;</td>
+<td class="org-left">&#x2026;</td>
+<td class="org-left">&#x2026;</td>
+</tr>
+<tbody>
+<tr>
 </tr>
 </tbody>
 </table>
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org5d5fb96" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org483f0b3" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org5d5fb96">Modeling RNA data&#x2013;Poisson</h3>
+<h3 id="org483f0b3">Modeling RNA data&#x2013;Poisson</h3>
 <p>
 <br>
 </p>
@@ -588,9 +684,9 @@ Model RNA-Seq data with Poisson distribution:
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org1296f2b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org2810f7e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org1296f2b">Modeling RNA data&#x2013;negative binomial</h3>
+<h3 id="org2810f7e">Modeling RNA data&#x2013;negative binomial</h3>
 <p>
 <br>
 </p>
@@ -611,9 +707,9 @@ Model RNA-Seq data with negative binomial distribution:
 </div>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orga448c63" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orge27438b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orga448c63">Existing methods and their limitations</h3>
+<h3 id="orge27438b">Existing methods and their limitations</h3>
 <ul>
 <li>Arbitrary cutoff 
 <ul>
@@ -636,9 +732,9 @@ It provides biologically meaningful gene ranks for differential expression, but 
 </div>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org8bc3757" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org4f2e13b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org8bc3757">Existing methods and their limitations</h3>
+<h3 id="org4f2e13b">Existing methods and their limitations</h3>
 <ul>
 <li><p>
 DESeq<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>  
@@ -668,9 +764,9 @@ DEGseq models RNA-Seq data by binomial distribution and groups genes with simila
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org1db3621" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org66c8180" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org1db3621">Existing methods and their limitations</h3>
+<h3 id="org66c8180">Existing methods and their limitations</h3>
 <ul>
 <li><p>
 edgeR<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>
@@ -690,18 +786,18 @@ edgeR assigns an arbitrary value of the dispersion parameter to all genes and co
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgd73d8db" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org7112228" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgd73d8db"></h3>
+<h3 id="org7112228"></h3>
 <p>
 <br><br><br><br><br>
 Can we by-pass gene level estimation of expression variance?
 </p>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org297a9f2" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org37446bb" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org297a9f2">Plot single-subject RNA-Seq data</h3>
+<h3 id="org37446bb">Plot single-subject RNA-Seq data</h3>
 
 <div class="figure">
 <p><img src="./Figures/fig-beforeVST.png" alt="fig-beforeVST.png" />
@@ -710,9 +806,9 @@ Can we by-pass gene level estimation of expression variance?
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgcfc39e5" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orga15c8c8" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgcfc39e5">Stabilize variance</h3>
+<h3 id="orga15c8c8">Stabilize variance</h3>
 
 <div class="figure">
 <p><img src="./Figures/fig-trans.png" alt="fig-trans.png" />
@@ -722,9 +818,9 @@ Can we by-pass gene level estimation of expression variance?
 </section>
 </section>
 <section>
-<section id="slide-org60a68af" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgdcfb518" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="org60a68af">Presentation outline</h2>
+<h2 id="orgdcfb518">Presentation outline</h2>
 <ul>
 <li>Background &amp; Motivating data</li>
 <li>Methodology
@@ -751,9 +847,9 @@ Can we by-pass gene level estimation of expression variance?
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org282ab31" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orga680b62" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org282ab31">VST&#x2013;Poisson</h3>
+<h3 id="orga680b62">VST&#x2013;Poisson</h3>
 <p>
 <br>
 </p>
@@ -781,9 +877,9 @@ then
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org1251f09" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgc813327" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org1251f09">Summary statistic \(\scriptsize{Z_{g}}\)</h3>
+<h3 id="orgc813327">Summary statistic \(\scriptsize{Z_{g}}\)</h3>
 <p>
 <br><br>
 </p>
@@ -800,18 +896,18 @@ Under null hypothesis:
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org113dc2e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgb58f6a0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org113dc2e"></h3>
+<h3 id="orgb58f6a0"></h3>
 <p>
 <br><br><br><br><br>
 Can we borrow strength across genes?
 </p>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgb9b6f57" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org622c936" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgb9b6f57">Two-group mixture model</h3>
+<h3 id="org622c936">Two-group mixture model</h3>
 <p align="left">
 Suppose \(G\) genes are measured in the RNA-Seq experiment, each of the genes is either null or differentially expressed with prior probabilities \(\pi_{0}\) or \(\pi_{1} = 1-\pi_{0}\). And the density function of \(z_{g}\) is either \(f_{0}(z)\) or \(f_{1}(z)\).
 </p>
@@ -837,9 +933,9 @@ The marginal mixture density is:
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgd0cf1b0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org314e4ba" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgd0cf1b0">Two-group mixture model</h3>
+<h3 id="org314e4ba">Two-group mixture model</h3>
 <p align="left">
 The local false positive rate, \(fdr\), is the Bayes posterior probability that a gene \(g\) is a null gene given \(z_{g}\): 
 <br><br>
@@ -853,9 +949,9 @@ The local false positive rate, \(fdr\), is the Bayes posterior probability that 
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgc303d77" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org158af3e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgc303d77">Two-group mixture model</h3>
+<h3 id="org158af3e">Two-group mixture model</h3>
 <p align="left" style="font-size:90%">
 \(f_{0}\) corresponds to an empirical null distribution. 
 </p>
@@ -876,9 +972,9 @@ Fortunately, in large-scale simultaneous testing, the parallel structure allows 
 </p>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgd4ec4e5" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org870b098" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgd4ec4e5">Algorithm</h3>
+<h3 id="org870b098">Algorithm</h3>
 <ul>
 <li><b>Step 1.</b> Apply the VST transformation to expression counts for each gene.</li>
 <li><b>Step 2.</b> Compute the summary statistic \(Z_g\) for each gene.</li>
@@ -890,9 +986,9 @@ Fortunately, in large-scale simultaneous testing, the parallel structure allows 
 </section>
 </section>
 <section>
-<section id="slide-orgfa77bbf" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgb598a7a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="orgfa77bbf">Presentation outline</h2>
+<h2 id="orgb598a7a">Presentation outline</h2>
 <ul>
 <li>Background &amp; Motivating data</li>
 <li>Methodology
@@ -918,9 +1014,9 @@ Fortunately, in large-scale simultaneous testing, the parallel structure allows 
 </ul>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org296ebb9" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orge848d98" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org296ebb9">VST-negative binomial</h3>
+<h3 id="orge848d98">VST-negative binomial</h3>
 <p>
 <br><br>
 </p>
@@ -932,9 +1028,9 @@ h_{nb}(Y_{gd}) = \frac{1}{\sqrt{\delta_{g}}}sinh^{-1}\sqrt{Y_{gd} \delta_{g}} +\
 </div>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org9049768" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgc0847d2" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org9049768">Estimate \(\scriptsize{\delta_g}\)</h3>
+<h3 id="orgc0847d2">Estimate \(\scriptsize{\delta_g}\)</h3>
 <p align="left">
 Assumptions 
 </p>
@@ -945,9 +1041,9 @@ Assumptions
 </ul>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgdba1949" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgb9ec9b9" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgdba1949">Estimate \(\scriptsize{\delta_g}\)</h3>
+<h3 id="orgb9ec9b9">Estimate \(\scriptsize{\delta_g}\)</h3>
 <ul>
 <li><b>Step 1: "Initial" estimate of \(\delta_g\)</b>
 <ol style="font-size:95%">
@@ -975,9 +1071,9 @@ Y_{gd} \overset{\cdot}{\sim} NB(\bar\mu_{w}, \bar\delta_{w}), \quad \forall g \i
 </ul>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org6c3d556" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org046cdaa" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org6c3d556">Estimate \(\scriptsize{\delta_g}\)</h3>
+<h3 id="org046cdaa">Estimate \(\scriptsize{\delta_g}\)</h3>
 <ul>
 <li><b>Step 1: "Initial" estimate of \(\delta_g\)</b>
 <ol style="font-size:95%">
@@ -1006,9 +1102,9 @@ Compute \(\bar\delta_{w}\)
 </ul>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgc2ec67f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org14ee8f8" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgc2ec67f">Estimate \(\scriptsize{\delta_g}\)</h3>
+<h3 id="org14ee8f8">Estimate \(\scriptsize{\delta_g}\)</h3>
 <ul>
 <li><b>Step 2: "Refined" smooth estimate of \(\delta_{g}\)</b>
 <ol style="font-size:95%">
@@ -1039,9 +1135,9 @@ Obtain the refined estimate
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org6432232" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org322afc1" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org6432232">Compute local false discovery rate</h3>
+<h3 id="org322afc1">Compute local false discovery rate</h3>
 <ul align="left">
 <li>compute the summary statistic \(Z_g\)</li>
 
@@ -1064,9 +1160,9 @@ Obtain the refined estimate
 </div>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orga3d6731" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org54e84f0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orga3d6731">Algorithm</h3>
+<h3 id="org54e84f0">Algorithm</h3>
 <ul style="font-size:80%">
 <li><b>Step 1.</b> Group genes into windows based on their gene expression levels.</li>
 <li><b>Step 2.</b> Compute \(\hat{\bar{\mu}}_{w}\) and \(\hat{\bar{\sigma}}^2_w\) for each window \(w\), and obtain a "raw" estimate of \(\delta_g\).</li>
@@ -1081,9 +1177,9 @@ Obtain the refined estimate
 </section>
 </section>
 <section>
-<section id="slide-org5fe7886" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org312824c" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="org5fe7886">Presentation outline</h2>
+<h2 id="org312824c">Presentation outline</h2>
 <ul>
 <li>Background &amp; Motivating data</li>
 <li>Methodology
@@ -1105,9 +1201,9 @@ Obtain the refined estimate
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgdee6165" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org08ba835" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgdee6165">Simulate a single-subject dataset</h3>
+<h3 id="org08ba835">Simulate a single-subject dataset</h3>
 <p align="left">
 Simulate a pair of transcriptomes:
 </p>
@@ -1123,9 +1219,9 @@ P(\mu_{g1}) &=& \frac{1}{500} e^{-\frac{1}{500} \mu_{g1}} \quad \quad g = 1,\cdo
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgbfc33f2" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org6b2f526" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgbfc33f2">Simulate a single-subject dataset</h3>
+<h3 id="org6b2f526">Simulate a single-subject dataset</h3>
 <div align="right"> 
 <font style="background-color:lightgray"> <i> Cont'd </i> </font>
 </div>
@@ -1147,9 +1243,9 @@ n &\sim& \mathcal{N}(9,1)
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgda90b3a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org1623a44" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgda90b3a">Simulation Procedure</h3>
+<h3 id="org1623a44">Simulation Procedure</h3>
 <ul>
 <li><b><b>Step 1:</b></b> Simulate one single-subject dataset, which contains \(p \%\) DEG.</li>
 <li><b><b>Step 2:</b></b> Conduct iDEG, edgeR<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>, DESeq<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup>, and DEGseq<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.</li>
@@ -1171,9 +1267,9 @@ n &\sim& \mathcal{N}(9,1)
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org02d273f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org21e5655" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org02d273f">Performance evaluation&#x2013;Poisson</h3>
+<h3 id="org21e5655">Performance evaluation&#x2013;Poisson</h3>
 
 <div class="figure">
 <p><img src="./Figures/fig-study1.png" alt="fig-study1.png" />
@@ -1181,9 +1277,9 @@ n &\sim& \mathcal{N}(9,1)
 </div>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org95b1d5b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org5f0ed90" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org95b1d5b">Performance eval&#x2013;NB (varying \(\scriptsize \delta_g\))</h3>
+<h3 id="org5f0ed90">Performance eval&#x2013;NB (varying \(\scriptsize \delta_g\))</h3>
 
 <div class="figure">
 <p><img src="./Figures/fig-study2.png" alt="fig-study2.png" />
@@ -1192,9 +1288,9 @@ n &\sim& \mathcal{N}(9,1)
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org8dcba6b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org43d19e8" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org8dcba6b">Performance eval&#x2013;NB (constant \(\scriptsize \delta_g\))</h3>
+<h3 id="org43d19e8">Performance eval&#x2013;NB (constant \(\scriptsize \delta_g\))</h3>
 
 <div class="figure">
 <p><img src="./Figures/fig-study3.png" alt="fig-study3.png" />
@@ -1203,9 +1299,9 @@ n &\sim& \mathcal{N}(9,1)
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgd3898d8" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org82bb86b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgd3898d8">Operating characteristics</h3>
+<h3 id="org82bb86b">Operating characteristics</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" table="rules=&quot;groups&quot;" style="font-size:40%">
 
 
@@ -1425,9 +1521,9 @@ Although the Recall/TPR and number of precisions of iDEG are lower than edgeR, i
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org0687d78" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgb53b839" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org0687d78">Sensitivity Analysis</h3>
+<h3 id="orgb53b839">Sensitivity Analysis</h3>
 <p align="left">
 Our experience indicates that without making assumptions on RNA-Seq data, it is difficult to construct suitable statistical inferences for a single-subject dataset. Nonetheless we test the two main assumptions we make:
 </p>
@@ -1441,9 +1537,9 @@ Our experience indicates that without making assumptions on RNA-Seq data, it is 
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org60cdb59" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgd8537ee" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org60cdb59">Sensitivity Analysis</h3>
+<h3 id="orgd8537ee">Sensitivity Analysis</h3>
 <ol>
 <li>Draw  dispersion parameter \(\delta_{g}\) from a uniform distribution, \(\text{unif}(0.001, 0.1)\).</li>
 
@@ -1456,9 +1552,9 @@ Our experience indicates that without making assumptions on RNA-Seq data, it is 
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org0abf892" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org9105192" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org0abf892">Sensitivity Analysis</h3>
+<h3 id="org9105192">Sensitivity Analysis</h3>
 <ol>
 <li>Simulate single-subject datasets with a series of percentages of DEG.</li>
 
@@ -1474,9 +1570,9 @@ Our experience indicates that without making assumptions on RNA-Seq data, it is 
 </section>
 </section>
 <section>
-<section id="slide-org64ae3ae" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org62b8b88" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="org64ae3ae">Presentation outline</h2>
+<h2 id="org62b8b88">Presentation outline</h2>
 <ul>
 <li>Background &amp; Motivating data</li>
 <li>Methodology
@@ -1503,9 +1599,9 @@ Our experience indicates that without making assumptions on RNA-Seq data, it is 
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org8013390" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org0f5e76f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org8013390">Data</h3>
+<h3 id="org0f5e76f">Data</h3>
 <p align="left">
 A transcriptome of tumor sample and a transcriptome of surrounding healthy sample of an African American woman with Triple negative breast cancer (TNBC). 
 </p>
@@ -1515,10 +1611,10 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 </p>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org81f648e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgba88b7f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org81f648e">iDEG result</h3>
-<table id="org5b3485b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<h3 id="orgba88b7f">iDEG result</h3>
+<table id="orga89f55a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 3:</span> The 10 top-hit (smallest local fdr) differentially expressed genes.</caption>
 
 <colgroup>
@@ -1605,9 +1701,9 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 </table>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org086ae44" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org0d738b0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org086ae44">Some interesting genes</h3>
+<h3 id="org0d738b0">Some interesting genes</h3>
 <ul style="font-size:65%">
 <li><b>ADIPOQ</b> &amp; <b>LEP</b>: Adiponectin (gene product of gene ADIPOQ) and leptin (gene product of LEP) are considered as mediators for the association of breast cancer with obesity, which is a major risk factor for breast cancer (Nalabolu et al., 2014; Grossmann et al., 2010).</li>
 <li><b>PLA2G2A</b>: Although PLA2G2A has not been extensively studied for breast cancer, many studies have shown that it inhibits invasion and metastasis of gastric and colon cancer (Ganesan et al., 2008; Movahedian et al., 2016; Fijneman et al., 2009) and may predict survival (Xing et al., 2011).</li>
@@ -1618,9 +1714,9 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 </section>
 </section>
 <section>
-<section id="slide-orgbcceb1c" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org37ca8df" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="orgbcceb1c">Presentation outline</h2>
+<h2 id="org37ca8df">Presentation outline</h2>
 <ul>
 <li>Background &amp; Motivating data</li>
 <li>Methodology
@@ -1646,9 +1742,9 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 </ul>
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orgeaa3fb8" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org8bbe9ac" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgeaa3fb8">Summary of contributions</h3>
+<h3 id="org8bbe9ac">Summary of contributions</h3>
 <ol>
 <li>Development of a method to detect bidirectional pathway differential expression and is resistant to transcriptome background noise: MixEnrich</li>
 <li>Development of a nonparametric robust method to detect pathway differential expression: kMEn</li>
@@ -1670,10 +1766,13 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-orga5f2863" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org698e6a9" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orga5f2863">Future directions</h3>
-<ul table="rules=&quot;groups&quot;" style="font-size:70%">
+<h3 id="org698e6a9">Future directions</h3>
+<p>
+<br>
+</p>
+<ul>
 <li>Extend the single-subject methods beyond the current Case-vs.-Baseline design.</li>
 <li>Extend iDEG for gene-set analysis</li>
 <li>Explore applications of single-subject methods in discovering the differences and similarities among patients.</li>
@@ -1683,9 +1782,9 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 </section>
 </section>
 <section>
-<section id="slide-orgc54d87d" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org67589ad" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="orgc54d87d">Acknowledgements</h2>
+<h2 id="org67589ad">Acknowledgements</h2>
 <div class="sliderow">
 
 <div class="leftcol">
@@ -1721,9 +1820,9 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 </section>
 </section>
 <section>
-<section id="slide-org6333b13" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org3cd713f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="org6333b13"></h2>
+<h2 id="org3cd713f"></h2>
 <p>
 <br><br><br><br>
 Questions?
@@ -1732,15 +1831,15 @@ Questions?
 </section>
 </section>
 <section>
-<section id="slide-org130e2d6" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org23c2a05" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="org130e2d6">Backup slides</h2>
-<div class="outline-text-2" id="text-org130e2d6">
+<h2 id="org23c2a05">Backup slides</h2>
+<div class="outline-text-2" id="text-org23c2a05">
 </div><div class="slide-footer"></div>
 </section>
-<section id="slide-orgc6415ee" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-org22e6304" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="orgc6415ee">Performance eval&#x2013;Poisson</h3>
+<h3 id="org22e6304">Performance eval&#x2013;Poisson</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1947,9 +2046,9 @@ Questions?
 
 <div class="slide-footer"></div>
 </section>
-<section id="slide-org5dbbd51" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<section id="slide-orgffc771d" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h3 id="org5dbbd51">Performance eval&#x2013;NB(constant \(\scriptsize \delta_g\))</h3>
+<h3 id="orgffc771d">Performance eval&#x2013;NB(constant \(\scriptsize \delta_g\))</h3>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" table="rules=&quot;groups&quot;" style="font-size:45%">
 
 
@@ -2193,7 +2292,8 @@ dependencies: [
  { src: './plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
  { src: './plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
  { src: '', async: true },
- { src: './plugin/multiplex/client.js', async: true }]
+ { src: './plugin/multiplex/client.js', async: true },
+]
 });
 </script>
 </body>
