@@ -303,8 +303,10 @@ Provide a robust model to identify differentially expressed pathways from a pair
   - MixEnrich
   - kMEn
   - @@html:<font color="#1b91ff">iDEG</font>@@
-      #+ATTR_REVEAL: :frag (highlight-blue none none)
+     #+ATTR_REVEAL: :frag (highlight-blue none none)
     - Procedure
+      - Poisson case
+      - negative binomial case
     - Numerical studies
     - Real data analysis
 - Summary & future directions
@@ -428,6 +430,10 @@ Model RNA-Seq data with negative binomial distribution:
 </div>
 #+END_EXPORT
 
+** 
+
+@@html:<br><br><br><br><br>@@
+Can we by-pass gene level estimation of expression variance?
 ** Plot single-subject RNA-Seq data
 #+BEGIN_SRC R :exports none :results output :session :eval no
 rm(list=ls())
@@ -494,9 +500,19 @@ cowplot::plot_grid(p_comb, get_legend(p1 + theme(legend.position = 'bottom')),nc
 [[file:./Figures/fig-trans.png]]
 
 [[./Figures/fig-trans.png]]
-** 
-@@html:<br><br><br><br><br>@@
-iDEG--Poisson Case
+* Presentation outline
+- Background & Motivating data
+- Methodology
+  - MixEnrich
+  - kMEn
+  - iDEG
+    - Procedure
+      - @@html:<font color="#1b91ff">Poisson case</font>@@
+      - negative binomial case
+    - Numerical studies
+    - Real data analysis
+- Summary & future directions
+
 ** VST--Poisson
 @@html:<br>@@
 #+ATTR_HTML: :align left
@@ -523,6 +539,10 @@ Under null hypothesis:
  \qquad Z_{g} = \frac{1}{\sqrt{2}}[h_{Pois}(Y_{g2}) - h_{Pois}(Y_{g1})] \overset{\cdot}{\sim} \text{N}(0,1)
  \end{equation}
 
+** 
+
+@@html:<br><br><br><br><br>@@
+Can we borrow strength across genes?
 ** Two-group mixture model
 #+ATTR_HTML: :align left
 Suppose $G$ genes are measured in the RNA-Seq experiment, each of the genes is either null or differentially expressed with prior probabilities $\pi_{0}$ or $\pi_{1} = 1-\pi_{0}$. And the density function of $z_{g}$ is either $f_{0}(z)$ or $f_{1}(z)$.
@@ -569,9 +589,18 @@ In large-scale simultaneous hypothesis testing, the theoretical null may be defi
 - *Step 2.* Compute the summary statistic $Z_g$ for each gene.
 - *Step 3.* Estimate the local false discovery rate $fdr(z_g)$ for each gene.
 
-** 
-@@html:<br><br><br><br><br>@@
-iDEG--negative binomial Case
+* Presentation outline
+- Background & Motivating data
+- Methodology
+  - MixEnrich
+  - kMEn
+  - iDEG
+    - Procedure
+      - Poisson case
+      - @@html:<font color="#1b91ff">negative binomial case</font>@@
+    - Numerical studies
+    - Real data analysis
+- Summary & future directions
 ** VST-negative binomial
 @@html:<br><br>@@
 #+ATTR_HTML: :style font-size:85%
@@ -891,6 +920,8 @@ Our experience indicates that without making assumptions on RNA-Seq data, it is 
   - kMEn
   - iDEG
     - Procedure
+      - Poisson case
+      - negative binomial case
     - Numerical studies
     - @@html:<font color="#1b91ff">Real data analysis</font>@@
 - Summary & future directions
@@ -930,6 +961,8 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
   - kMEn
   - iDEG
     - Procedure
+      - Poisson case
+      - negative binomial case
     - Numerical studies
     - Real data analysis
 - @@html:<font color="#1b91ff">Summary & future directions</font>@@
