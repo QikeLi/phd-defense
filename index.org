@@ -207,11 +207,24 @@ p_tnbc
 ** Our solutions 
 #+ATTR_HTML: :align left
 To identify DEP:
-- @@html:N-of-1-<i>pathways</i> MixEnrich@@
-- @@html:N-of-1-<i>pathways</i> kMEn@@
+- @@html:N-of-1-<i>pathways</i> MixEnrich@@[fn:1]
+- @@html:N-of-1-<i>pathways</i> kMEn@@[fn:2]
 #+ATTR_HTML: :align left
 To identify DEG:
 - iDEG
+#+BEGIN_EXPORT html
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Li, Q. et. al., 2010, <i>BMC medical genomics</i> </li>
+<li style="font-size:85%"> Li, Q. et al., 2009, <i>Journal of biomedical informatics</i></li>
+</ol>
+</div>
+#+END_EXPORT
+
 ** Our solution                                                   :noexport:
 #+ATTR_HTML: :align left
 #+ATTR_REVEAL: :frag (appear)
@@ -924,7 +937,21 @@ TNBC is a subtype of breast cancer that has poor prognosis and considerable hete
 1. Development of a method to detect bidirectional pathway differential expression and is resistant to transcriptome background noise: MixEnrich
 2. Development of a nonparametric robust method to detect pathway differential expression: kMEn 
 3. Development of a gene differential expression testing procedure that can operate when sample size is one.
-4. Development of an R package of the methods.
+4. Development of an R package[fn:1][fn:2] of the methods.
+#+BEGIN_EXPORT html
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> www.lussiergroup.org/publications/N-of-1-pathways </li>
+<li style="font-size:85%"> github.com/QikeLi/iDEG </li>
+</ol>
+</div>
+#+END_EXPORT
+
+
 * Future directions
 - Extend the single-subject methods beyond the current Case-vs.-Baseline design.
 - Extend iDEG for gene-set analysis
@@ -1033,5 +1060,5 @@ Questions?
 |      | edgeR  | 0.741 (6.0\times 10^{-3}) | 0.96 (3.2\times 10^{-3})  | 0.084 (2.6\times 10^{-3}) | 0.836 (4.1\times 10^{-3}) | 5181.78 (45)    |
 |------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
 |      | DESeq  | NA (NA)                   | 0 (0)                     | 0 (0)                     | NA (NA)                   | 0 (0)           |
-|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|   
+|------+--------+---------------------------+---------------------------+---------------------------+---------------------------+-----------------|
 |      | DEGseq | 0.333 (2.3\times 10^{-3}) | 0.987 (1.9\times 10^{-3}) | 0.494 (5.0\times 10^{-3}) | 0.498 (2.6\times 10^{-3}) | 11857.92 (80)   |
