@@ -153,17 +153,22 @@ _Strategies:_
 _Strategies:_
 #+ATTR_HTML: :style font-size:80% 
 3. [@3] Use two matched transcriptomes (e.g, disease vs. healthy tissue samples)
-  - @@html:N-of-1-<i>pathways</i> Wilcoxon@@[fn:1]
-  - @@html:N-of-1-<i>pathways</i> Mahalanobis Distance@@[fn:2]
+   - @@html:N-of-1-<i>pathways</i> Wilcoxon@@^{1}
+   - @@html:N-of-1-<i>pathways</i> Mahalanobis Distance@@^{2}
+   - GFOLD^{3},  DEGseq^{4},  DESeq^{5}, edgeR^{6}
 #+BEGIN_EXPORT html
 <!-- For future reference: -->
 <!-- The following script is used when multiple references need to be listed as a list -->
-<br><br><br><br><br>
 <div class="referencelist"> 
+<br>
 <hr></hr>
 <ol>
 <li style="font-size:85%"> Gardeux, V. et. al., 2014, <i> JAMIA</i> </li>
 <li style="font-size:85%"> Schissler, AG. et al., 2015, <i>Bioinformatics</i></li>
+<li style="font-size:85%"> Feng, J. et. al., 2012, <i> Bioinformatics </i></li>
+<li style="font-size:85%"> Wang, L. et al., 2009, <i>Bioinformatics</i></li>
+<li style="font-size:85%"> Anders, S. et. al., 2010, <i> Genome biology </i> </li>
+<li style="font-size:85%"> Robinson, M. D. et. al., 2010, <i>Bioinformatics</i> Genome biology </i> </li>
 </ol>
 </div>
 #+END_EXPORT
