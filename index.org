@@ -395,7 +395,7 @@ To identify DEG:
   - HIV treatment dataset: correlates with CD4 counts
 ** Methods comparison
 @@html:<br>@@
-[[./Figures/table3-1.png]]
+[[./Figures/table3-1v2.png]]
 ** Publication
 
 #+BEGIN_EXPORT html
