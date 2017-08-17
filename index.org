@@ -750,7 +750,7 @@ In practice, the theoretical null may be deficient due to various reasons:
 h_{nb}(Y_{gd}) = \frac{1}{\sqrt{\delta_{g}}}sinh^{-1}\sqrt{Y_{gd} \delta_{g}} +\sqrt{1/\delta_{g} - 1}sinh^{-1}\sqrt{\frac{Y_{gd} + 3/4}{1/\delta_{g} -3/2}}  
 \end{equation}
 ** Estimate $\scriptsize{\delta_g}$
-@@html:<br><br>@@
+@@html:<br>@@
 #+ATTR_HTML: :align left
 Assumptions 
 #+ATTR_REVEAL: :frag (appear)
@@ -810,7 +810,7 @@ Assumptions
    \hat{\delta}_g = \hat{q}_\lambda(\hat{\bar\mu}_w), \qquad \forall g\in\mathcal{G}_w,~~ w=1,\ldots, W. 
    \end{equation} 
 
-** Compute local false discovery rate ($fdr$)
+** Compute $fdr$
 #+ATTR_HTML: :align left
 - Compute the summary statistic $Z_g$
 #+ATTR_HTML: :style font-size:90% 
@@ -1096,6 +1096,23 @@ Two matched transcriptomes from an African American woman with triple negative b
 - @@html:<font color="#1b91ff">Summary & future directions</font>@@
 
 ** Summary of contributions
+#+ATTR_HTML: :align left
+Three Projects for Single-subject Analysis:
+   #+ATTR_HTML: :style font-size:70%
+1) MixEnrich
+2) kMEn
+3) iDEG
+
+#+ATTR_HTML: :align left
+For each project, 
+   #+ATTR_HTML: :style font-size:70%
+- Developed statistical methods and computational tools
+- Studied statistical properties of estimators
+- Conducted extensive simulations to evaluate their performance
+- Made comparisons with existing methods
+- Applied to real data for new discoveries (head and neck cancer, HIV, TNBC)
+- New R code and packages 
+- Presented them at international conferences 
 # #+ATTR_HTML: :style font-size:70%
 # 1. MixEnrich (DEP)
 #     #+ATTR_HTML: :style font-size:75%
@@ -1126,24 +1143,6 @@ Two matched transcriptomes from an African American woman with triple negative b
 # </ol>
 # </div>
 # #+END_EXPORT
-
-#+ATTR_HTML: :align left
-Three Projects for Single-subject Analysis:
-   #+ATTR_HTML: :style font-size:70%
-1) MixEnrich
-2) kMEn
-3) iDEG
-
-#+ATTR_HTML: :align left
-For each project, 
-   #+ATTR_HTML: :style font-size:70%
-- Developed statistical methods and computational tools
-- Studied statistical properties of estimators
-- Conducted extensive simulations to evaluate their performance
-- Made comparisons with existing methods
-- Applied to real data for new discoveries (head and neck cancer, HIV, TNBC)
-- New R code and packages 
-- Presented them at international conferences 
 
 ** Future directions
 #+ATTR_HTML: 
