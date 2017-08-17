@@ -330,7 +330,7 @@ To identify DEG:
   - Step2: FET for pathway over-representation of DEGs
 - *Results*
   #+ATTR_HTML: :style font-size:70% 
-  - Simulation: higher precision and recall (bidirectional dysregulated, background noise)
+  - Simulation: higher precision and recall (bidirectionally dysregulated, background noise)
   - Head and neck cancer: compatible performance as conventional methods with more samples.
 ** Publication
 #+BEGIN_EXPORT html
@@ -525,7 +525,7 @@ Model RNA-Seq data with negative binomial distribution:
 - GFOLD [fn:1:]  
   - Poisson distribution assumption
   - Ranks genes for differential expression
-  - no significance assessment
+  - No significance assessment
 #+BEGIN_EXPORT html
 <div class="reference"> 
 <br><br><br><br><br>
@@ -660,7 +660,7 @@ Y_{gd} \sim \mbox{Poisson} (\mu_{gd})
 \end{equation}
 @@html:<br>@@
 #+ATTR_HTML: :align left
-then
+Then
 #+ATTR_HTML: :style font-size:85%
 \begin{equation}
     h_{Pois}(Y_{gd}) = \sqrt{Y_{gd}}+\sqrt{Y_{gd} +1} \overset{\cdot}{\sim}  N(\sqrt{\mu_{gd}}+\sqrt{\mu_{gd}+1}, 1), \quad  d=1,2.
@@ -1014,13 +1014,13 @@ The two main assumptions we make:
 #+ATTR_HTML: :align left :style font-size:90%
 Two matched transcriptomes from an African American woman with triple negative breast cancer (TNBC). 
 #+ATTR_HTML: :style font-size:65%
-- 1092 breast cancer patients were studied by TCGA[1].
-- 2 A.A. with matched tumor/healthy samples.
-- A.A. 12.7% of the total U.S. population[2].
-- Disproportionately affects women with African origin[3].
+- 1092 breast cancer patients were studied by TCGA[1]
+- 2 A.A. with matched tumor/healthy samples
+- A.A. 12.7% of the total U.S. population[2]
+- Disproportionately affects women with African origin[3]
    # (Dietze et al., 2015).
-- TNBC has poor prognosis and considerable heterogeneity[4].
-- A set of her specific DEGs and match some of these DEGs to the targets of a therapeutic drug.
+- TNBC has poor prognosis and considerable heterogeneity[4]
+- To identify a set of her specific DEGs and match some of these DEGs to the targets of a therapeutic drug
 #+BEGIN_EXPORT html
 <br><br>
 <div class="reference" style="font-size:40%"> 
@@ -1054,18 +1054,18 @@ Two matched transcriptomes from an African American woman with triple negative b
 #+ATTR_HTML: :style font-size:65%
 - *ADIPOQ* & *LEP*
   #+ATTR_HTML: :style font-size:75%
-  - Their gene products (Adiponectin, leptin) are considered as mediators for the association of breast cancer with obesity.
+  - Their gene products (Adiponectin, leptin) are considered as mediators for the association of breast cancer with obesity
 # , which is a major risk factor for breast cancer (Nalabolu et al., 2014; Grossmann et al., 2010).
 - *PLA2G2A*: 
      # Although PLA2G2A has not been extensively studied for breast cancer,
   #+ATTR_HTML: :style font-size:75%
-  -  Inhibits invasion and metastasis of gastric and colon cancer.
+  -  Inhibits invasion and metastasis of gastric and colon cancers
     #  (Ganesan et al., 2008; Movahedian et al., 2016; Fijneman et al., 2009) and 
-  -  May predict survival.
+  -  May predict survival
        # (Xing et al., 2011).
 - *TUSC5*: 
   #+ATTR_HTML: :style font-size:75%
-  - Methylation induced down-regulation of TUSC5 in breast cancer.
+  - Methylation induced down-regulation of TUSC5 in breast cancer
 # Bubnov et al. (2012) has demonstrated the down-regulation of TUSC5 induced by DNA methylation in breast cancer. In contrast to mutated genes, DNA methylation is reversible.
 
 
@@ -1147,9 +1147,9 @@ For each project,
 ** Future directions
 #+ATTR_HTML: 
 @@html:<br>@@
-- Extend the single-subject methods beyond the Case-vs.-Baseline design.
+- Extend the single-subject methods beyond the Case-vs.-Baseline design
 - Extend iDEG for gene-set analysis
-- Explore applications of single-subject methods in discovering the differences and similarities among patients.
+- Explore applications of single-subject methods in discovering the differences and similarities among patients
 * Acknowledgements
 
 #+BEGIN_EXPORT html
@@ -1173,10 +1173,11 @@ For each project,
 <div class="rightcol">
 
 <br>
-<ul>
+<ul style="font-size:70%">
 <li> Statistics GIDP</li>
 <li> The Lussier Group</li>
 <li> College of Medicine</li>
+<li> Department of Mathematics</li>
 <li> CB2</li>
 <li> UofA Biostatistics</li>
 <li> My family</li>
@@ -1328,3 +1329,81 @@ p_num_study
 [[file:./Figures/fig-study3.png]]
 
 [[./Figures/fig-study3.png]]
+
+
+* fdr estimation
+** Local fdr--Marginal distribution estimation
+Lindsey's method  supposes $G$ $z_{g}'s$ have been binned into $M$ bins, giving the counts of $\mathit{N} = (n_{1}, n_{2}, \cdots, n_{m})^{\prime}$ of $z$. 
+
+\begin{eqnarray*}
+  \label{eq:partition}
+  \mathcal{Z} &=& \displaystyle{\cup_{m=1}^{M} \mathcal{Z}_{m}}\\
+  n_{m} &=& \#\{z_{g}\in\mathcal{Z}_{m}\}
+\end{eqnarray*}
+
+** Local fdr--Marginal distribution estimation
+
+The counts $n_{m}$ amount to the counts in the bins of the histogram. Now the density $f_{\boldsymbol{\beta}}(z)$ is reduced to
+\begin{equation*}
+  \label{eq:multinomial}
+\mathit{N} \sim \mathrm{multinomial}_{M}(G,\boldsymbol{\pi})  
+\end{equation*}
+where $\pi_{m}(\boldsymbol{\beta}) = w f_{\boldsymbol{\beta}}(x_{m})$. And $w$ is the bin width in the histogram; $x_{m}$ is midpoint of $z_{g}$ in $\mathcal{Z}_{m}$ . 
+
+** Local fdr--Marginal distribution estimation
+Based on the relationship between multinomial and Poisson distribution, we assume the $n_{m}$ to be the independent Poisson observations. 
+\begin{equation*}
+  \label{eq:count-hist-dist}
+  n_{m}\overset{ind}{\sim} Pois(v_{m}), \quad v_{m} = G \pi_{m}(\boldsymbol{\beta})   \qquad k = 1, 2, \cdots, K  
+\end{equation*}
+
+** Local fdr--Marginal distribution estimation
+Then we use standard Poisson generalized linear model to compute $\boldsymbol{\hat{\beta}}$
+\begin{equation*}
+  \label{eq:pois-regression}
+  log(\boldsymbol{v}) = \alpha_{0} + \boldsymbol{X\beta}
+\end{equation*}
+where $X$ is the design matrix with $m^{th}$ row as $(x_{m},x_{m}^2, \cdots, x_{m}^K)^{\prime}$. 
+
+
+** Local fdr--Empirical null distribution estimation
+
+
+** Local fdr--Empirical null distribution estimation
+Without assumptions of the parametric forms of of $f_{0}$ and $f_{1}$, the two-group model  is unidentifiable. To restore the identifiability, we make the ``zero assumption'', which enables the estimation of $\pi_{0}$ and $f_{0}$. 
+\begin{equation*}
+  \label{eq:zero-assump}
+f_1(z) = 0 \qquad \text{for } z\in\mathcal{A}_{0}  
+\end{equation*}
+
+** Local fdr--Empirical null distribution estimation
+\begin{eqnarray*}
+  \label{eq:mle-null-def}
+  \mathcal{G}_{0} &=& \{g : z_{g}\in\mathcal{A}_{0}\}\\
+    N_{0} &=& |\mathcal{G}_{0}|\\
+  \boldsymbol{z}_{0} &=& \{z_{g}, g\in\mathcal{G}_{0}\}\\
+  f_{0}(z) &=& \frac{1}{\sigma_{0}}\varphi(\frac{z-\mu_{0}}{\sigma_{0}})
+\end{eqnarray*}
+
+\begin{equation*}
+  \label{eq:likelihood-f0}
+  f_{\mu_{0},\sigma_{0},p_{0}}(\boldsymbol{z_{0}}) = \bigg[\binom{G}{N_{0}} p^{N_{0}}(1-p)^{G-N_{0}} \bigg] \bigg[ \displaystyle\prod_{\mathcal{G}_{0}} \frac{ \varphi_{\mu_{0},\sigma_{0}}(z_{g})} {\int_{\mathcal{A}_{0} } \varphi_{\mu_{0},\sigma_{0}}(z) dz} \bigg]
+\end{equation*}
+
+\begin{equation*}
+  \label{eq:prob-null-case}
+  p = \pi_{0}\int_{\mathcal{A}_{0} } \varphi_{\mu_{0},\sigma_{0}}(z) dz = Pr\{z_{g} \in \mathcal{A}_{0}\}
+\end{equation*}
+** Local fdr--Empirical null distribution estimation
+In consequence, 
+\begin{equation*}
+  \label{eq:pi0-est}
+  \widehat{\pi_{0}} = \frac{\hat{p}}{\int_{\mathcal{A}_{0} } \hat{f_{0}}(z) dz}
+\end{equation*}
+
+** Local false positive rate (local fdr) 
+Finally, with the estimate of marginal distribution, $\hat{f}$ from section , the estimate of $\hat{\pi}_{0}$,  and the estimate of empirical null density, $\hat{f}_{0}$, we get to compute $\widehat{fdr}$
+\begin{equation*}
+  \label{eq:fdr-computation}
+  \widehat{fdr}(z) = \widehat{\pi_{0}}\hat{f}_{0}(z)/\hat{f}_(z)
+\end{equation*}
