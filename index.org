@@ -753,8 +753,8 @@ h_{nb}(Y_{gd}) = \frac{1}{\sqrt{\delta_{g}}}sinh^{-1}\sqrt{Y_{gd} \delta_{g}} +\
 #+ATTR_HTML: :align left
 Assumptions 
 #+ATTR_REVEAL: :frag (appear)
-  - We assume $\delta_{g1} = \delta_{g2} = \delta_{g}$ and $\delta_{g}$ is a smooth function $q(\cdot)$ of the expression mean $\mu_{g}$.
-  - We assume the majority of the genes are null genes ($\overline{\mathcal{G}}$).   
+  - $\delta_{g1} = \delta_{g2} = \delta_{g}$ and $\delta_{g}$ is a smooth function $q(\cdot)$ of the expression mean $\mu_{g}$.
+  - The majority of the genes are null genes ($\overline{\mathcal{G}}$).   
 # Specifically,   
 # #+ATTR_HTML: :style font-size:80%
 # \begin{eqnarray*}
@@ -774,7 +774,7 @@ Assumptions
      \mathcal{G}_w= \{g: (w-1)^{th} ~ \mbox{percentile of} ~ Y_{g1} < Y_{g1} \leq w^{th} ~ \mbox{percentile of} ~ Y_{g1}\}
      \end{equation}
    #+ATTR_HTML: :style font-size:95%
-  2. Then all the null genes falling within the same window, $\mathcal{G}_w$, roughly have the same mean and $\delta$ values, i.e., 
+  2. All null genes falling within the same window, $\mathcal{G}_w$, roughly have the same mean and $\delta$ values, i.e., 
      #+ATTR_HTML: :style font-size:23px
      \begin{equation*}
      Y_{gd} \overset{\cdot}{\sim} NB(\bar\mu_{w}, \bar\delta_{w}), \quad \forall g \in \mathcal{G}_w\cap\overline{\mathcal{G}} ~~ d=1,2,
@@ -809,14 +809,14 @@ Assumptions
    \hat{\delta}_g = \hat{q}_\lambda(\hat{\bar\mu}_w), \qquad \forall g\in\mathcal{G}_w,~~ w=1,\ldots, W. 
    \end{equation} 
 
-** Compute local false discovery rate$fdr$
+** Compute local false discovery rate ($fdr$)
 #+ATTR_HTML: :align left
-- compute the summary statistic $Z_g$
+- Compute the summary statistic $Z_g$
 #+ATTR_HTML: :style font-size:90% 
  \begin{equation}
  \qquad Z_{g} = \frac{1}{\sqrt{2}}[h_{nb}(Y_{g2}) - h_{nb}(Y_{g1})] 
  \end{equation}
-- compute the local false discovery rate
+- Compute the local false discovery rate
 #+ATTR_HTML: :style font-size:90% 
 \begin{equation*}
   fdr(z_g) = \pi_{0}f_{0}(z_g)/f(z_g)
@@ -824,7 +824,7 @@ Assumptions
 ** Algorithm
 @@html:<br>@@
 #+ATTR_HTML: :style font-size:80%
-- *Step 1.* Group genes into windows based on their gene expression levels.
+- *Step 1.* Group genes into windows based on gene expression levels.
 - *Step 2.* Compute $\hat{\bar{\mu}}_{w}$ and $\hat{\bar{\sigma}}^2_w$ for each window $w$, and obtain a "raw" estimate of $\delta_g$.
 - *Step 3.* Obtain a "refined" estimate of $\delta_g$ by fitting a smoothing spline.
 ** Algorithm
@@ -887,7 +887,7 @@ n &\sim& \mathcal{N}(9,1)
 F_{1} = \frac{2\times Precision \times Recall}{Precision + Recall}   
 \end{equation*}
 - **Step 4:** Repeat Step1-Step3 for 1000 times
-- **Step 5:** Calculate the arithmetic mean and standard deviation of the 1000 $F_{1}$ resulted from each method.
+- **Step 5:** Calculate the arithmetic mean and standard deviation of 1000 $F_{1}$ resulted from each method.
 - **Step 6:** Change the value of $p$, repeat Step 1-Step 5
 
 #+BEGIN_EXPORT html
@@ -1095,36 +1095,54 @@ Two matched transcriptomes from an African American woman with triple negative b
 - @@html:<font color="#1b91ff">Summary & future directions</font>@@
 
 ** Summary of contributions
-#+ATTR_HTML: :style font-size:70%
-1. MixEnrich (DEP)
-    #+ATTR_HTML: :style font-size:75%
-   - Bidirectional pathway differential expression
-   - Resistant to transcriptome background noise
-   - Head and neck cancer study
-   - R implementation 
-2. kMEn (DEP)
-   #+ATTR_HTML: :style font-size:75%
-   - Nonparametric robust model
-   - HIV treatment study
-   - R implementation 
-3. iDEG (DEG)
-   #+ATTR_HTML: :style font-size:75%
-   - By-passing gene-level variance estimation
-   - Strength borrowing across genes
-   - TNBC study
-   - R implementation
+# #+ATTR_HTML: :style font-size:70%
+# 1. MixEnrich (DEP)
+#     #+ATTR_HTML: :style font-size:75%
+#    - Bidirectional pathway differential expression
+#    - Resistant to transcriptome background noise
+#    - Head and neck cancer study
+#    - R implementation 
+# 2. kMEn (DEP)
+#    #+ATTR_HTML: :style font-size:75%
+#    - Nonparametric robust model
+#    - HIV treatment study
+#    - R implementation 
+# 3. iDEG (DEG)
+#    #+ATTR_HTML: :style font-size:75%
+#    - By-passing gene-level variance estimation
+#    - Strength borrowing across genes
+#    - TNBC study
+#    - R implementation
 
-#+BEGIN_EXPORT html
-<!-- For future reference: -->
-<!-- The following script is used when multiple references need to be listed as a list -->
-<br><br><br><br><br>
-<div class="referencelist"> 
-<hr></hr>
-<ol>
-<li style="font-size:85%"> github.com/QikeLi/iDEG </li>
-</ol>
-</div>
-#+END_EXPORT
+# #+BEGIN_EXPORT html
+# <!-- For future reference: -->
+# <!-- The following script is used when multiple references need to be listed as a list -->
+# <br><br><br><br><br>
+# <div class="referencelist"> 
+# <hr></hr>
+# <ol>
+# <li style="font-size:85%"> github.com/QikeLi/iDEG </li>
+# </ol>
+# </div>
+# #+END_EXPORT
+
+#+ATTR_HTML: :align left
+Three Projects for Single-subject Analysis:
+   #+ATTR_HTML: :style font-size:70%
+1) MixEnrich
+2) kMEn
+3) iDEG
+
+#+ATTR_HTML: :align left
+For each project, 
+   #+ATTR_HTML: :style font-size:70%
+- Developed statistical methods and computational tools
+- Studied statistical properties of estimators
+- Conducted extensive simulations to evaluate their performance
+- Made comparisons with existing methods
+- Applied to real data for new discoveries (head and neck cancer, HIV, TNBC)
+- New R code and packages 
+- Presented them at international conferences 
 
 ** Future directions
 #+ATTR_HTML: 
