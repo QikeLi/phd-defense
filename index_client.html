@@ -25,14 +25,1702 @@
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
-<section>
-<section id="slide-orgc3352ec" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org38ddbf6" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
 <div class="slide-header"></div>
-<h2 id="orgc3352ec">Summary of contributions</h2>
+<h3 id="org38ddbf6">New Statistical Methods of  <br> Single-subject Transcriptome Analysis for Precision Medicine</h3>
+<p>
+Qike Li 
+</p>
+<p style="font-size:70%">
+Lussier Group<br />
+Center for Biomedical Informatics &amp; Biostatistics (CB2) <br />
+Statistics GIDP, University of Arizona <br />
+<br>
+Statistical advisor: Dr. Hao Helen Zhang <br />
+Biomedical informatics advisor: Dr. Yves A. Lussier
+</p>
+
+
+<div class="figure">
+<p><img src="./Figures/statistics-gidp.png" alt="statistics-gidp.png" align="left" height="80px" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./Figures/CB2.png" alt="CB2.png" align="right" height="80px" />
+</p>
+</div>
+
+<div class="figure">
+<p><img src="./Figures/Lussier.png" alt="Lussier.png" align="center" height="80px" />
+</p>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org7e1d9a0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org7e1d9a0">Presentation outline</h2>
+<ul>
+<li class="fragment highlight-blue">Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li>MixEnrich</li>
+<li>kMEn</li>
+<li>iDEG
+<ul>
+<li>Procedure</li>
+<li>Numerical studies</li>
+<li>Real data analysis</li>
+
+</ul></li>
+
+</ul></li>
+<li>Summary &amp; future directions</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgea76fe8" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgea76fe8">Precision Medicine</h3>
+
+<div class="figure">
+<p><img src="./Figures/Precision_Medicine.png" alt="Precision_Medicine.png" align="center" width="50%" height="50%" />
+</p>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org1f66138" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org1f66138">Single-subject analysis</h3>
+<p>
+<br><br>
+</p>
+
+<p>
+<span class="fragment highlight-blue">Single-subject analysis</span> studies  <span class="fragment highlight-blue">one patient</span> at a time, with the purpose of revealing the  <span class="fragment highlight-blue">patient-specific</span> disease mechanisms for highly heterogeneous diseases.
+</p>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgf924677" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgf924677">Single-subject analysis</h3>
+<p align="left">
+<span class="underline">Strategies:</span>
+</p>
+<ol style="font-size:80%">
+<li>Use one disease tissue sample
+<ul>
+<li>FAIME<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></li>
+<li>ssGSEA<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></li>
+
+</ul></li>
+
+</ol>
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Yang, X. et. al., 2012, <i> PLoS Comput Biol </i> </li>
+<li style="font-size:85%"> Barbie, DA. et al., 2009, <i>Nature</i></li>
+</ol>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org7cc0033" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org7cc0033">Single-subject analysis</h3>
+<p align="left">
+<span class="underline">Strategies:</span>
+</p>
+<ol style="font-size:80%">
+<li value="2">Use reference transcriptome
+<ul>
+<li>Pathifier<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup></li>
+<li>individPath<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></li>
+
+</ul></li>
+
+</ol>
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Drier, Y. et. al., 2013, <i> Proc Natl Acad Sci</i> </li>
+<li style="font-size:85%"> Wang, H. et al., 2016, <i>Biref Bioinform</i></li>
+</ol>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgf74df24" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgf74df24">Single-subject analysis</h3>
+<p align="left">
+<span class="underline">Strategies:</span>
+</p>
+<ol style="font-size:80%">
+<li value="3">Use two matched transcriptomes (e.g, disease vs. healthy tissue samples)
+<ul>
+<li>N-of-1-<i>pathways</i> Wilcoxon<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup></li>
+<li>N-of-1-<i>pathways</i> Mahalanobis Distance<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></li>
+
+</ul></li>
+
+</ol>
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Gardeux, V. et. al., 2014, <i> JAMIA</i> </li>
+<li style="font-size:85%"> Schissler, AG. et al., 2015, <i>Bioinformatics</i></li>
+</ol>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgec645b3" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgec645b3">Single-subject analysis</h3>
+
+<div class="figure">
+<p><img src="./Figures/single-subject-analysis2.png" alt="single-subject-analysis2.png" align="right" />
+</p>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgeca61ec" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgeca61ec">Example data of single-subject analysis</h3>
+<p>
+<br>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> Example RNA-Seq quantified mRNA expression data</caption>
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Gene</th>
+<th scope="col" class="org-right">Case expression</th>
+<th scope="col" class="org-right">Baseline expression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">A1BG</td>
+<td class="org-right">92</td>
+<td class="org-right">72</td>
+</tr>
+
+<tr>
+<td class="org-left">A1CF</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">A2BP1</td>
+<td class="org-right">0</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-left">A2LD1</td>
+<td class="org-right">127</td>
+<td class="org-right">71</td>
+</tr>
+
+<tr>
+<td class="org-left">A2ML1</td>
+<td class="org-right">773</td>
+<td class="org-right">12</td>
+</tr>
+
+<tr>
+<td class="org-left">A2M</td>
+<td class="org-right">11825</td>
+<td class="org-right">29385</td>
+</tr>
+
+<tr>
+<td class="org-left">A4GALT</td>
+<td class="org-right">871</td>
+<td class="org-right">891</td>
+</tr>
+
+<tr>
+<td class="org-left">A4GNT</td>
+<td class="org-right">1</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-left">AAA1</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">AAAS</td>
+<td class="org-right">414</td>
+<td class="org-right">460</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2026;</td>
+<td class="org-right">&#x2026;</td>
+<td class="org-right">&#x2026;</td>
+</tr>
+</tbody>
+</table>
+
+<div class="reference" style="font-size:40%"> 
+<br><br>
+<font><hr></hr><sup> Table 1: Data source <a href="https://portal.gdc.cancer.gov/">https://portal.gdc.cancer.gov/</a></sup> </font>
+</div>
+</section>
+<section  data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+
+<div class="figure">
+<p><img src="./Figures/giphy.gif" alt="giphy.gif" height="650px" />
+</p>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org6b90269" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org6b90269">Our goal</h3>
+<p style="font-size:95%" align="left">
+From two matched transcriptomes, identify <b>patient-specific</b> molecular defects and cellular processes leading to a patient's pathology:
+</p>
+<ul style="font-size:90%">
+<li class="fragment appear"><u>d</u>ifferentially <u>e</u>xpressed <u>p</u>athways (DEP)</li>
+<li class="fragment appear"><u>d</u>ifferentially <u>e</u>xpressed <u>g</u>enes (DEG)</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgfb182bc" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgfb182bc">Main Challenges</h3>
+<p>
+<br> 
+</p>
+<ul>
+<li>"Single-subject Single-observation" (sample size = <b>1</b>)
+<ul>
+<li>Different genes have different variances</li>
+<li>Only two numbers for each gene</li>
+
+</ul></li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org674d41e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org674d41e">Our solutions</h3>
+<p align="left">
+To identify DEP:
+</p>
+<ul>
+<li>N-of-1-<i>pathways</i> MixEnrich<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup></li>
+<li>N-of-1-<i>pathways</i> kMEn<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup></li>
+
+</ul>
+<p align="left">
+To identify DEG:
+</p>
+<ul>
+<li>iDEG</li>
+
+</ul>
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Li, Q. et. al., 2010, <i>BMC medical genomics</i> </li>
+<li style="font-size:85%"> Li, Q. et al., 2009, <i>Journal of biomedical informatics</i></li>
+</ol>
+</div>
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org22efc1a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org22efc1a">Presentation outline</h2>
+<ul>
+<li>Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li><font color="#1b91ff">MixEnrich</font></li>
+<li>kMEn</li>
+<li>iDEG
+<ul>
+<li>Procedure</li>
+<li>Numerical studies</li>
+<li>Real data analysis</li>
+
+</ul></li>
+
+</ul></li>
+<li>Summary &amp; future directions</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org7d74b43" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org7d74b43">N-of-1-<i>pathways</i> MixEnrich</h3>
+<ul style="font-size:80%">
+<li><b>Motivation</b>
+<ul style="font-size:70%">
+<li>Bidirectional pathway differential expression</li>
+<li>Background noise</li>
+
+</ul></li>
+<li><b>Goal</b> 
+<ul style="font-size:70%">
+<li>Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy)</li>
+
+</ul></li>
+<li><b>Method</b>
+<ul style="font-size:70%">
+<li>Step1: Gaussian mixture model to cluster genes</li>
+<li>Step2: FET for pathway over-representation of DEGs</li>
+
+</ul></li>
+<li><b>Results</b>
+<ul style="font-size:70%">
+<li>Simulation: higher precision and recall (bidirectional dysregulated, background noise)</li>
+<li>Head and neck cancer: compatible performance as conventional methods with more samples.</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org5fd5efd" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org5fd5efd">Publication</h3>
+<div class="sliderow">
+
+<div class="leftcol">
+<br>
+<img src="./Figures/mixenrich-paper.png" style="float:left;width:100%;height:100%;" align="center"/>
+</div>
+
+<div class="rightcol">
+
+<br>
+<ul style="font-size:75%">
+<li> R package<sup>1</sup></li>
+<li> Presented at Translational Bioinformatics Conference 2016</li>
+<li> Berghout, Joanne*, <u>Qike Li</u>*, Nima Pouladi, Yves Lussier,  submitted to <i>Pacific Symposium on Biocomputing</i> (* joint first authorship)</li>
+
+</ul>
+
+<br>
+<div class="reference"> 
+<font style="font-size:75%"><hr></hr><sup>1. www.lussiergroup.org/publications/N-of-1-pathways</sup> </font>
+</div>
+
+</div>
+
+</div>
+
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org5cf354a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org5cf354a">Presentation outline</h2>
+<ul>
+<li>Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li>MixEnrich</li>
+<li><font color="#1b91ff">kMEn</font></li>
+<li>iDEG
+<ul>
+<li>Procedure</li>
+<li>Numerical studies</li>
+<li>Real data analysis</li>
+
+</ul></li>
+
+</ul></li>
+<li>Summary &amp; future directions</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org6aa53d8" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org6aa53d8">N-of-1-<i>pathways</i> kMEn</h3>
+<ul style="font-size:80%">
+<li><b>Motivation</b>
+<ul style="font-size:70%">
+<li>Relax the Gaussian assumption of MixEnrich</li>
+
+</ul></li>
+<li><b>Goal</b> 
+<ul style="font-size:70%">
+<li>Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy)</li>
+
+</ul></li>
+<li><b>Method</b>
+<ul style="font-size:70%">
+<li>Step1: k-means to cluster genes</li>
+<li>Step2: FET for pathway over-representation of DEGs</li>
+
+</ul></li>
+<li><b>Results</b>
+<ul style="font-size:70%">
+<li>Simulation: high AUC</li>
+<li>HIV treatment dataset: correlates with CD4 counts</li>
+
+</ul></li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgf997661" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgf997661">Methods comparison</h3>
+<p>
+<br>
+<img src="./Figures/table3-1.png" alt="table3-1.png" />
+</p>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org850f419" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org850f419">Publication</h3>
+<div class="sliderow">
+
+<div class="leftcol">
+<br>
+<img src="./Figures/kmen-paper.png" style="float:left;width:100%;height:100%;" align="center"/>
+</div>
+
+<div class="rightcol">
+
+<br>
+<ul style="font-size:75%">
+<li> R package<sup>1</sup></li>
+
+<li> Zaim, Samir *, <u>Qike Li*</u>, et.al, submitted
+to <i>Pacific Symposium on Biocomputing</i> (* joint first authorship)</li>
+
+</ul>
+
+<br><br><br><br><br>
+<div class="reference"> 
+<font style="font-size:75%"><hr></hr><sup>1. www.lussiergroup.org/publications/N-of-1-pathways</sup> </font>
+</div>
+
+</div>
+
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org621ce4f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org621ce4f">More contributions to DEP study</h3>
+<ul>
+<li>Review 
+<ul style="font-size:80%">
+<li>Vitali, Francesca, <span class="underline">Qike Li</span>, A. Grant Schissler, et. al., <i>Briefings of Bioinformatics</i> (under revision)</li>
+
+</ul></li>
+<li>Other DEP methods
+<ul style="font-size:80%">
+<li>Schissler, A. Grant*, Vincent Gardeux*, <span class="underline">Qike Li*</span>, et. al.,  <i>Bioinformatics</i> (2015).  (Intelligent Systems for Molecular Biology)</li>
+<li>Schissler, A. Grant*, <span class="underline">Qike Li*</span>, James L. Chen, et. al., <i>Bioinformatics</i> (2016).  (Intelligent Systems for Molecular Biology)</li>
+
+</ul></li>
+
+</ul>
+<div class="reference" style="font-size:60%"> 
+<br><br><br><br>
+<font ><hr></hr><sup>* Joint first authorship</sup> </font>
+</div>
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org788fb64" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org788fb64">Presentation outline</h2>
+<ul>
+<li>Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li>MixEnrich</li>
+<li>kMEn</li>
+<li><font color="#1b91ff">iDEG</font>
+<ul>
+<li class="fragment highlight-blue">Procedure
+<ul>
+<li>Poisson case</li>
+<li>negative binomial case</li>
+
+</ul></li>
+<li>Numerical studies</li>
+<li>Real data analysis</li>
+
+</ul></li>
+
+</ul></li>
+<li>Summary &amp; future directions</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org401509c" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org401509c">Goal</h3>
+<p>
+<br>
+</p>
+<p align="left" style="font-size:90%">
+Identify a set of patient-specific differentially expressed genes (DEGs) from two matched transcriptomes.
+</p>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org7002203" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org7002203">Example RNA-Seq quantified mRNA expression data (Single-Subject)</h3>
+<p>
+<br>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 2:</span> Single-subject RNA-Seq data example</caption>
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Gene</th>
+<th scope="col" class="org-right">Case expression</th>
+<th scope="col" class="org-right">Baseline expression</th>
+<th scope="col" class="org-right">Absolute Diff</th>
+<th scope="col" class="org-right">FC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">A1BG</td>
+<td class="org-right">92</td>
+<td class="org-right">72</td>
+<td class="org-right">20</td>
+<td class="org-right">0.78</td>
+</tr>
+
+<tr>
+<td class="org-left">A4GALT</td>
+<td class="org-right">871</td>
+<td class="org-right">891</td>
+<td class="org-right">20</td>
+<td class="org-right">1.02</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2026;</td>
+<td class="org-right">&#x2026;</td>
+<td class="org-right">&#x2026;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">gene-1</td>
+<td class="org-right">5</td>
+<td class="org-right">25</td>
+<td class="org-right">20</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-left">gene-2</td>
+<td class="org-right">100</td>
+<td class="org-right">500</td>
+<td class="org-right">400</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-left">gene-3</td>
+<td class="org-right">100,000</td>
+<td class="org-right">149,000</td>
+<td class="org-right">49,000</td>
+<td class="org-right">1.49</td>
+</tr>
+</tbody>
+</table>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgd3b1b7f" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgd3b1b7f">Modeling RNA data&#x2013;Poisson</h3>
+<p>
+<br>
+</p>
+<p align="left" style="font-size:90%">
+Model RNA-Seq data with Poisson distribution:
+<br>
+</p>
+<div style="font-size:90%">
+\begin{eqnarray}
+    P(Y_{gd}=y_{gd} | \mu_{gd})  &=& \frac{\mu_{gd}^{y_{gd}} e^{-\mu_{gd}}} {y_{gd}!} \\
+     &&\quad y_{gd}  = 0,1,\cdots; \\
+     &&\quad g=1, \cdots, G; ~d= 1,2\\
+  E(Y_{gd}) &=& \mu_{gd}\\
+  Var(Y_{gd}) &=& \mu_{gd}
+\end{eqnarray}
+
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org0abaad3" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org0abaad3">Modeling RNA data&#x2013;negative binomial</h3>
+<p>
+<br>
+</p>
+<p align="left" style="font-size:90%">
+Model RNA-Seq data with negative binomial distribution:
+<br>
+</p>
+<div style="font-size:90%">
+\begin{eqnarray}
+    P(Y_{gd} = y_{gd} | \mu_{gd}, \delta_g)  &=& 
+    (1 + \delta_{g}\mu_{gd})^{-1/\delta_{g}} \frac{\Gamma(y_{gd} + 1/\delta_{g})}{y_{gd}!\Gamma(1/\delta_{g})} \big(\frac{\delta_{g}\mu_{gd}}{1 + \delta_{g}\mu_{gd}}\big)^{y_{gd}} \nonumber \\
+    &&\quad y_{gd}  = 0,1,\cdots; \\
+     &&\quad g=1, \cdots, G; ~ d= 1,2 \label{eq:nb}\\
+  E(Y_{gd}) &=& \mu_{gd}\\
+  Var(Y_{gd}) &=& \mu_{gd} + \delta_{g}\mu_{gd}^{2}\label{eq:nbVar}
+\end{eqnarray}
+
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org8861d16" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org8861d16">Existing methods and their limitations</h3>
+<ul>
+<li>Arbitrary cutoff 
+<ul>
+<li>of gene expression fold changes</li>
+<li>of gene expression absolute differences</li>
+
+</ul></li>
+<li>GFOLD <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>  
+<ul>
+<li>Poisson distribution assumption</li>
+<li>Ranks genes for differential expression</li>
+<li>no significance assessment</li>
+
+</ul></li>
+
+</ul>
+<div class="reference"> 
+<br><br><br><br><br>
+<font ><hr></hr><sup>1. Feng, J. et. al., 2012, <i> Bioinformatics </i></sup> </font>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org95bdf1d" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org95bdf1d">Existing methods and their limitations</h3>
+<ul>
+<li>DESeq<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>  
+<ul>
+<li>Negative binomial distribution assumption</li>
+<li>Treats the two samples as if they were replicates</li>
+
+</ul></li>
+
+<li>DEGSeq<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup>
+<ul>
+<li>binomial distribution assumption</li>
+<li>Insufficient to model over-dispersed RNA-Seq data</li>
+
+</ul></li>
+
+</ul>
+<!-- For future reference: -->
+<!-- The following script is used when multiple references need to be listed as a list -->
+<br><br><br>
+<div class="referencelist"> 
+<hr></hr>
+<ol>
+<li style="font-size:85%"> Anders, S. et. al., 2010, <i> Genome biology </i> </li>
+<li style="font-size:85%"> Wang, L. et al., 2009, <i>Bioinformatics</i></li>
+</ol>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgc8371b0" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgc8371b0">Existing methods and their limitations</h3>
+<ul>
+<li>edgeR<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>
+<ul>
+<li>Negative binomial distribution assumption</li>
+<li>Assigns an arbitrary value for the dispersion parameter of all genes</li>
+
+</ul></li>
+
+</ul>
+
+
+<div class="reference"> 
+<br><br><br><br><br><br><br><br>
+<font ><hr></hr><sup>1.Robinson, M. D. et. al., 2010, <i>Bioinformatics</i></sup> </font>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orge63aff9" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orge63aff9"></h3>
+<p>
+<br><br><br><br><br>
+Can we by-pass gene level estimation of expression variance?
+</p>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgbedeb12" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgbedeb12">Single-subject RNA-Seq data (Poisson)</h3>
+
+<div class="figure">
+<p><img src="./Figures/fig-beforeVST.png" alt="fig-beforeVST.png" />
+</p>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org039811e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org039811e">Stabilize variance (Poisson)</h3>
+
+<div class="figure">
+<p><img src="./Figures/fig-trans.png" alt="fig-trans.png" />
+</p>
+</div>
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-orgc06eedc" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="orgc06eedc">Presentation outline</h2>
+<ul>
+<li>Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li>MixEnrich</li>
+<li>kMEn</li>
+<li>iDEG
+<ul>
+<li>Procedure
+<ul>
+<li><font color="#1b91ff">Poisson case</font></li>
+<li>negative binomial case</li>
+
+</ul></li>
+<li>Numerical studies</li>
+<li>Real data analysis</li>
+
+</ul></li>
+
+</ul></li>
+<li>Summary &amp; future directions</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org6058a50" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org6058a50">VST&#x2013;Poisson</h3>
+<p>
+<br>
+</p>
+<p align="left">
+Assume 
+</p>
+<div style="font-size:85%">
+\begin{equation}
+Y_{gd} \sim \mbox{Poisson} (\mu_{gd})
+\end{equation}
+
+</div>
+<p>
+<br>
+</p>
+<p align="left">
+then
+</p>
+<div style="font-size:85%">
+\begin{equation}
+    h_{Pois}(Y_{gd}) = \sqrt{Y_{gd}}+\sqrt{Y_{gd} +1} \overset{\cdot}{\sim}  N(\sqrt{\mu_{gd}}+\sqrt{\mu_{gd}+1}, 1), \quad  d=1,2.
+\end{equation}
+
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgbcbc5e6" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgbcbc5e6">Summary statistic \(\scriptsize{Z_{g}}\)</h3>
+<p>
+<br><br>
+</p>
+<p align="left">
+Under null hypothesis:
+<br>
+</p>
+<div style="font-size:90%">
+\begin{equation}
+\qquad Z_{g} = \frac{1}{\sqrt{2}}[h_{Pois}(Y_{g2}) - h_{Pois}(Y_{g1})] \overset{\cdot}{\sim} \text{N}(0,1)
+\end{equation}
+
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org9479697" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org9479697"></h3>
+<p>
+<br><br><br><br><br>
+Can we borrow strength across genes?
+</p>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orge31a029" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orge31a029">Two-group mixture model</h3>
+<p>
+<br>
+</p>
+
+<p align="left">
+Two groups:
+</p>
+<div style="font-size:90%">
+\begin{eqnarray*}
+      \pi_{0} &=& Pr\{\mbox{gene $g$ is null}\} \\
+    \pi_{1} &=& Pr\{\mbox{gene $g$ is DEG}\}
+\end{eqnarray*}
+
+</div>
+
+<p align="left">
+The marginal mixture density is:
+</p>
+<div style="font-size:90%">
+\begin{equation*}
+  \label{eq:mixtureDens}
+  f(z) = \pi_{0}f_{0}(z) + \pi_{1}f_{1}(z)
+\end{equation*}
+
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org840c11b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org840c11b">Two-group mixture model</h3>
+<p>
+<br>
+</p>
+<p align="left">
+The local false positive rate, \(fdr\), is the Bayes posterior probability that a gene \(g\) is a null gene given \(z_{g}\): 
+<br><br>
+</p>
+<div style="font-size:90%">
+\begin{equation*}
+  fdr(z) \equiv Pr\{\text{null gene} | z\} = \pi_{0}f_{0}(z)/f(z)
+\end{equation*}
+
+</div>
+<p align="left" style="font-size:90%">
+\(f_{0}\) corresponds to an empirical null distribution. 
+</p>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orga1d1c00" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orga1d1c00">Blessing of high dimensionality</h3>
+<p>
+<br><br>
+</p>
+<p align="left" style="font-size:90%">
+In practice, the theoretical null may be deficient due to various reasons: 
+</p>
+
+<ul>
+<li>Correlation across genes</li>
+
+<li>Unobserved covariates (e.g. gender, age, smoking status, etc.)</li>
+
+<li>Failed mathematical assumptions (e.g. asymptotic approximation).</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgf2e8456" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgf2e8456">Algorithm</h3>
+<p>
+<br>
+</p>
+<ul>
+<li><b>Step 1.</b> Apply the VST transformation to expression counts for each gene.</li>
+<li><b>Step 2.</b> Compute the summary statistic \(Z_g\) for each gene.</li>
+<li><b>Step 3.</b> Estimate the local false discovery rate \(fdr(z_g)\) for each gene.</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-orgf2dab21" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="orgf2dab21">Presentation outline</h2>
+<ul>
+<li>Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li>MixEnrich</li>
+<li>kMEn</li>
+<li>iDEG
+<ul>
+<li>Procedure
+<ul>
+<li>Poisson case</li>
+<li><font color="#1b91ff">negative binomial case</font></li>
+
+</ul></li>
+<li>Numerical studies</li>
+<li>Real data analysis</li>
+
+</ul></li>
+
+</ul></li>
+<li>Summary &amp; future directions</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgb62c1c3" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgb62c1c3">VST-negative binomial</h3>
+<p>
+<br><br>
+</p>
+<div style="font-size:85%">
+\begin{equation}
+h_{nb}(Y_{gd}) = \frac{1}{\sqrt{\delta_{g}}}sinh^{-1}\sqrt{Y_{gd} \delta_{g}} +\sqrt{1/\delta_{g} - 1}sinh^{-1}\sqrt{\frac{Y_{gd} + 3/4}{1/\delta_{g} -3/2}}  
+\end{equation}
+
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org93bc8c1" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org93bc8c1">Estimate \(\scriptsize{\delta_g}\)</h3>
+<p>
+<br><br>
+</p>
+<p align="left">
+Assumptions 
+</p>
+<ul>
+<li class="fragment appear">\(\delta_{g1} = \delta_{g2} = \delta_{g}\) and \(\delta_{g}\) is a smooth function \(q(\cdot)\) of the expression mean \(\mu_{g}\).</li>
+<li class="fragment appear">The majority of the genes are null genes (\(\overline{\mathcal{G}}\))</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org36b838d" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org36b838d">Estimate \(\scriptsize{\delta_g}\)</h3>
+<ul>
+<li><b>Step 1: "Initial" estimate of \(\delta_g\)</b>
+<ol style="font-size:95%">
+<li><p>
+Define the \(w^{th}\) window as
+</p>
+<div style="font-size:23px">
+\begin{equation} 
+\mathcal{G}_w= \{g: (w-1)^{th} ~ \mbox{percentile of} ~ Y_{g1} < Y_{g1} \leq w^{th} ~ \mbox{percentile of} ~ Y_{g1}\}
+\end{equation}
+
+</div></li>
+<li><p>
+All null genes falling within the same window, \(\mathcal{G}_w\), roughly have the same mean and \(\delta\) values, i.e., 
+</p>
+<div style="font-size:23px">
+\begin{equation*}
+Y_{gd} \overset{\cdot}{\sim} NB(\bar\mu_{w}, \bar\delta_{w}), \quad \forall g \in \mathcal{G}_w\cap\overline{\mathcal{G}} ~~ d=1,2,
+\end{equation*} 
+
+</div></li>
+
+</ol></li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org734f6aa" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org734f6aa">Estimate \(\scriptsize{\delta_g}\)</h3>
+<ul>
+<li><b>Step 1: "Initial" estimate of \(\delta_g\)</b>
+<ol style="font-size:95%">
+<li value="3"><p>
+Estimate \(\bar\mu_{w}\) and \(\bar\sigma_{w}\)
+</p>
+<div style="font-size:23px">
+\begin{eqnarray}
+\hat{\bar\mu}_{w} &=& \text{Median} (Y_{g1}) \quad\forall g\in \mathcal{G}_w,\\
+\hat{\bar\sigma}_{w} &=& \text{Median} (|Y_{g1} - \text{Median}(Y_{g1})|)  \quad\forall g\in\mathcal{G}_w. \label{eq:MAD-win}
+\end{eqnarray}
+
+</div></li>
+<li><p>
+Compute \(\bar\delta_{w}\) 
+</p>
+<div style="font-size:23px">
+\begin{equation}
+  \hat{\bar\delta}_{w} = \frac{\hat{\bar\sigma}_{w}^{2} - \hat{\bar\mu}_{w}}{\hat{\bar\mu}_{w}^{2}}, \quad w=1,\ldots, W.
+\end{equation}
+
+</div></li>
+
+</ol></li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org7eba7e6" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org7eba7e6">Estimate \(\scriptsize{\delta_g}\)</h3>
+<ul>
+<li><b>Step 2: "Refined" smooth estimate of \(\delta_{g}\)</b>
+<ol style="font-size:95%">
+<li><p>
+Estimate the equation \(q\) by solving 
+</p>
+<div>
+\begin{equation}
+\label{eq:smoothFit}
+\min_{q\in\mathcal{Q}}\sum_{w=1}^{W} \{\hat{\bar\delta}_{w}-q(\hat{\bar\mu}_{w})\}^2 + \lambda\int [q^{''}(t)]^2 dt,
+\end{equation}
+
+</div></li>
+<li><p>
+Obtain the refined estimate
+</p>
+<div>
+\begin{equation}
+\label{eq:prediction}
+\hat{\delta}_g = \hat{q}_\lambda(\hat{\bar\mu}_w), \qquad \forall g\in\mathcal{G}_w,~~ w=1,\ldots, W. 
+\end{equation} 
+
+</div></li>
+
+</ol></li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgf8d8017" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgf8d8017">Compute local false discovery rate (\(fdr\))</h3>
+<ul align="left">
+<li>Compute the summary statistic \(Z_g\)</li>
+
+</ul>
+<div style="font-size:90%">
+\begin{equation}
+\qquad Z_{g} = \frac{1}{\sqrt{2}}[h_{nb}(Y_{g2}) - h_{nb}(Y_{g1})] 
+\end{equation}
+
+</div>
+<ul>
+<li>Compute the local false discovery rate</li>
+
+</ul>
+<div style="font-size:90%">
+\begin{equation*}
+  fdr(z_g) = \pi_{0}f_{0}(z_g)/f(z_g)
+\end{equation*}
+
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org40b2981" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org40b2981">Algorithm</h3>
+<p>
+<br>
+</p>
+<ul style="font-size:80%">
+<li><b>Step 1.</b> Group genes into windows based on gene expression levels.</li>
+<li><b>Step 2.</b> Compute \(\hat{\bar{\mu}}_{w}\) and \(\hat{\bar{\sigma}}^2_w\) for each window \(w\), and obtain a "raw" estimate of \(\delta_g\).</li>
+<li><b>Step 3.</b> Obtain a "refined" estimate of \(\delta_g\) by fitting a smoothing spline.</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org6a05f69" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org6a05f69">Algorithm</h3>
+<p>
+<br>
+</p>
+<ul style="font-size:80%">
+<li><b>Step 4.</b> Apply the VST \(h_{nb}\) to each gene expression count.</li>
+<li><b>Step 5.</b> Compute the standardized summary statistics \(Z_{g}\) for each gene.</li>
+<li><b>Step 6.</b> Estimate the local false discovery rate locfdr for each gene.</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org3379ec7" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org3379ec7">Presentation outline</h2>
+<ul>
+<li>Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li>MixEnrich</li>
+<li>kMEn</li>
+<li>iDEG
+<ul>
+<li>Procedure</li>
+<li><font color="#1b91ff"> Numerical studies</font></li>
+<li>Real data analysis</li>
+
+</ul></li>
+
+</ul></li>
+<li>Summary &amp; future directions</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org84260fa" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org84260fa">Simulate a single-subject dataset</h3>
+<p align="left">
+Simulate a pair of transcriptomes:
+</p>
+<div style="font-size:90%">
+\begin{eqnarray*}
+  Y_{g1} &\sim& \text{NB}(\mu_{g1}, \delta_{g})\\
+  Y_{g2} &\sim& \text{NB}(\mu_{g2}, \delta_{g})\\ 
+  \delta_{g} &=& 0.005 + 9/(\mu_{g1}+100) \\
+P(\mu_{g1}) &=& \frac{1}{500} e^{-\frac{1}{500} \mu_{g1}} \quad \quad g = 1,\cdots,20\,000
+ \end{eqnarray*}
+
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orga0e3e23" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orga0e3e23">Simulate a single-subject dataset</h3>
+<div align="right"> 
+<font style="background-color:lightgray"> <i> Cont'd </i> </font>
+</div>
+
+<div style="font-size:90%">
+\begin{eqnarray*}
+\mu_{g2} &=& \begin{cases}
+\mu_{g1}  & \text{if }g \in \overline{\mathcal{G}},\\
+d^{s}\mu_{g1}   & \text{if }g \in \mathcal{G}.\end{cases}\\
+&&\text{where $\mathcal{G}$ is a random subset of set $\{1,2, \cdots, 20000\}$}\\
+\frac{|\mathcal{G}|}{|\mathcal{G}| + |\overline{\mathcal{G}}|} &=& 0.05 \label{eq:DEG-pct}\\
+d  &=& \frac{\mu_{g1} + n \sqrt{\mu_{g1}}}{\mu_{g1}}\label{eq:DEG-fold-change}\\
+s &=& \begin{cases} 1 &\text{with probability of }0.5,\\
+-1 &\text{with probability of }0.5.\end{cases} \label{eq:fold-change-direction}\\
+n &\sim& \mathcal{N}(9,1)
+\end{eqnarray*}
+
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org822f105" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org822f105">Simulation Procedure</h3>
+<ul style="font-size:70%">
+<li><b><b>Step 1:</b></b> Simulate one single-subject dataset, which contains \(p \%\) DEG.</li>
+<li><b><b>Step 2:</b></b> Conduct iDEG, edgeR<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>, DESeq<sup><a id="fnr.2.100" class="footref" href="#fn.2">2</a></sup>, and DEGseq<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.</li>
+<li><b><b>Step 3:</b></b> Compute an F1 score for each method,</li>
+
+</ul>
+<div style="font-size:70%">
+\begin{equation*}
+F_{1} = \frac{2\times Precision \times Recall}{Precision + Recall}   
+\end{equation*}
+
+</div>
+<ul>
+<li><b><b>Step 4:</b></b> Repeat Step1-Step3 for 1000 times</li>
+<li><b><b>Step 5:</b></b> Calculate the arithmetic mean and standard deviation of 1000 \(F_{1}\) resulted from each method.</li>
+<li><b><b>Step 6:</b></b> Change the value of \(p\), repeat Step 1-Step 5</li>
+
+</ul>
+
+<div class="reference"> 
+<br>
+<font ><hr></hr><sup>1. Robinson, M. D. et. al., 2010, <i>Bioinformatics</i>;  2. Anders, S. et. al., 2010, <i> Genome biology </i>;<br /> 3. Wang, L. et al., 2009, <i>Bioinformatics</i></sup> </font>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org8205082" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org8205082">Performance eval&#x2013;NB</h3>
+<p>
+<br><br>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" table="rules=&quot;groups&quot;" style="font-size:40%">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">DEG%</th>
+<th scope="col" class="org-left">Method</th>
+<th scope="col" class="org-left">Precision</th>
+<th scope="col" class="org-left">Recall/TPR</th>
+<th scope="col" class="org-left">FPR</th>
+<th scope="col" class="org-left">F1</th>
+<th scope="col" class="org-left"># Predicted DEG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">5%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left"><font color="red">0.93</font> (1.6&times;10<sup>-2</sup>)</td>
+<td class="org-left"><font color="red">0.679</font> (2.5&times;10<sup>-2</sup>)</td>
+<td class="org-left">0.003 (7.2&times;10<sup>-4</sup>)</td>
+<td class="org-left">0.784 (1.5&times;10<sup>-2</sup>)</td>
+<td class="org-left">730 (34)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left"><font color="red">0.39</font> (8.4&times;10<sup>-3</sup>)</td>
+<td class="org-left"><font color="red">0.948</font> (7.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.078 (2.8&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.552 (8.6&times;10<sup>-3</sup>)</td>
+<td class="org-left">2,433 (54)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">0.999 (2.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.152 (3.8&times;10<sup>-2</sup>)</td>
+<td class="org-left">0 (1.8&times;10<sup>-5</sup>)</td>
+<td class="org-left">0.262 (5.8&times;10<sup>-2</sup>)</td>
+<td class="org-left">152 (38)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.086 (6.7&times;10<sup>-4</sup>)</td>
+<td class="org-left">0.985 (3.9&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.549 (3.9&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.159 (1.2&times;10<sup>-3</sup>)</td>
+<td class="org-left">11,409 (74)</td>
+</tr>
+</tbody>
+</table>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org2b8de50" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org2b8de50">Performance eval&#x2013;NB</h3>
+
+<div class="figure">
+<p><img src="./Figures/fig-study2.png" alt="fig-study2.png" />
+</p>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org9b57470" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org9b57470">Performance eval&#x2013;Poisson</h3>
+
+<div class="figure">
+<p><img src="./Figures/fig-study1.png" alt="fig-study1.png" />
+</p>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org6a492fc" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org6a492fc">Sensitivity Analysis</h3>
+<p>
+<br><br>
+</p>
+
+<p align="left">
+The two main assumptions we make:
+</p>
+
+<ul>
+<li>The value of dispersion parameter is a function of expression mean.</li>
+
+<li>The majority of the genes are null genes.</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org12adc87" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org12adc87">Sensitivity Analysis</h3>
+<ol>
+<li>Draw  dispersion parameter \(\delta_{g}\) from a uniform distribution, \(\text{unif}(0.001, 0.1)\).</li>
+
+</ol>
+
+<div class="figure">
+<p><img src="./Figures/fig-sensitivity-random.png" alt="fig-sensitivity-random.png" />
+</p>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgb9f8031" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgb9f8031">Sensitivity Analysis</h3>
+<ol>
+<li value="2">Simulate single-subject datasets with a series of percentages of DEG.</li>
+
+</ol>
+
+
+<div class="figure">
+<p><img src="./Figures/fig-sensitivity-highDEG.png" alt="fig-sensitivity-highDEG.png" />
+</p>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org632213e" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org632213e">Presentation outline</h2>
+<ul>
+<li>Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li>MixEnrich</li>
+<li>kMEn</li>
+<li>iDEG
+<ul>
+<li>Procedure
+<ul>
+<li>Poisson case</li>
+<li>negative binomial case</li>
+
+</ul></li>
+<li>Numerical studies</li>
+<li><font color="#1b91ff">Real data analysis</font></li>
+
+</ul></li>
+
+</ul></li>
+<li>Summary &amp; future directions</li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org647c418" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org647c418">Data</h3>
+<p align="left" style="font-size:90%">
+Two matched transcriptomes from an African American woman with triple negative breast cancer (TNBC). 
+</p>
+<ul style="font-size:65%">
+<li>1092 breast cancer patients were studied by TCGA[1].</li>
+<li>2 A.A. with matched tumor/healthy samples.</li>
+<li>A.A. 12.7% of the total U.S. population[2].</li>
+<li>Disproportionately affects women with African origin[3].</li>
+<li>TNBC has poor prognosis and considerable heterogeneity[4].</li>
+<li>A set of her specific DEGs and match some of these DEGs to the targets of a therapeutic drug.</li>
+
+</ul>
+<br><br>
+<div class="reference" style="font-size:40%"> 
+<font ><hr></hr><sup>
+[1] Cancer Genome Atlas Network, 2012, <i>Nature  </i>;  &nbsp  
+[2] www.census.gov; &nbsp  
+[3] Dietze, E. C., et. al., 2015, <i>Nature Reviews Cancer  </i>  &nbsp  
+[4] Bianchini, G., et. al.,2016 <i>Nature Reviews</i>&nbsp  
+</sup> </font>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgf35518a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgf35518a">iDEG result</h3>
+<table id="org4205614" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 3:</span> The 10 top-hit</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Gene</th>
+<th scope="col" class="org-right">local_fdr</th>
+<th scope="col" class="org-right">Z</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">ADIPOQ</td>
+<td class="org-right">2.85e-34</td>
+<td class="org-right">-11.17</td>
+</tr>
+
+<tr>
+<td class="org-left">PLA2G2A</td>
+<td class="org-right">2.85e-34</td>
+<td class="org-right">-11.65</td>
+</tr>
+
+<tr>
+<td class="org-left">PI16</td>
+<td class="org-right">1.15e-33</td>
+<td class="org-right">-10.78</td>
+</tr>
+
+<tr>
+<td class="org-left">LEP</td>
+<td class="org-right">2.25e-33</td>
+<td class="org-right">-10.70</td>
+</tr>
+
+<tr>
+<td class="org-left">SFTPB</td>
+<td class="org-right">1.44e-32</td>
+<td class="org-right">-10.59</td>
+</tr>
+
+<tr>
+<td class="org-left">IL33</td>
+<td class="org-right">4.24e-31</td>
+<td class="org-right">-10.36</td>
+</tr>
+
+<tr>
+<td class="org-left">TUSC5</td>
+<td class="org-right">6.74e-31</td>
+<td class="org-right">-10.32</td>
+</tr>
+
+<tr>
+<td class="org-left">CSF3</td>
+<td class="org-right">2.89e-29</td>
+<td class="org-right">-10.04</td>
+</tr>
+
+<tr>
+<td class="org-left">COL6A6</td>
+<td class="org-right">3.24e-29</td>
+<td class="org-right">-10.04</td>
+</tr>
+
+<tr>
+<td class="org-left">CCL21</td>
+<td class="org-right">1.99e-28</td>
+<td class="org-right">-9.90</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2026;</td>
+<td class="org-right">&#x2026;</td>
+<td class="org-right">&#x2026;</td>
+</tr>
+</tbody>
+</table>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgc51178a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgc51178a">Some interesting genes</h3>
+<ul style="font-size:65%">
+<li><b>ADIPOQ</b> &amp; <b>LEP</b>
+<ul style="font-size:75%">
+<li>Their gene products (Adiponectin, leptin) are considered as mediators for the association of breast cancer with obesity.</li>
+
+</ul></li>
+
+</ul>
+
+<ul>
+<li><b>PLA2G2A</b>: 
+
+<ul style="font-size:75%">
+<li>Inhibits invasion and metastasis of gastric and colon cancer.</li>
+<li>May predict survival.</li>
+
+</ul></li>
+<li><b>TUSC5</b>: 
+<ul style="font-size:75%">
+<li>Methylation induced down-regulation of TUSC5 in breast cancer.</li>
+
+</ul></li>
+
+</ul>
+
+
+<br><br>
+<div class="reference" style="font-size:40%"> 
+<font ><hr></hr><sup>
+<p>LEP: Anders, Nalabolu. M.R., et. al., 2014, <i> Hematology-oncology and stem cell research </i>. ADIPOQ: Grossmann, M. E., et al., 2009, <i>Cancer and Metastasis Reviews</i>. </p>
+
+<p>PLA2G2A: Ganesan, K., et. al., 2008 <i> Cancer Research </i>; Movahedian, A., et. al., 2016 <i>Research in Medical Sciences</i>; Fijneman, R. J., et. al., 2009  <i>Analytical Cellular Pathology</i>; Xing, X.-F., et. al., 2011 <i> Histopathology </i>.</p>
+
+<p>TUSC5: Bubnov, V., et. al., 2012 <i>Exp Oncol</i></p>
+</sup> </font>
+</div>
+
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org44701f6" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org44701f6">Presentation outline</h2>
+<ul>
+<li>Background &amp; Motivating data</li>
+<li>Methodology
+<ul>
+<li>MixEnrich</li>
+<li>kMEn</li>
+<li>iDEG
+<ul>
+<li>Procedure
+<ul>
+<li>Poisson case</li>
+<li>negative binomial case</li>
+
+</ul></li>
+<li>Numerical studies</li>
+<li>Real data analysis</li>
+
+</ul></li>
+
+</ul></li>
+<li><font color="#1b91ff">Summary & future directions</font></li>
+
+</ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org4b9b4b2" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org4b9b4b2">Summary of contributions</h3>
 <p align="left">
 Three Projects for Single-subject Analysis:
 </p>
@@ -56,6 +1744,728 @@ For each project,
 <li>Presented them at international conferences</li>
 
 </ul>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org9fbf675" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org9fbf675">Future directions</h3>
+<p>
+<br>
+</p>
+<ul>
+<li>Extend the single-subject methods beyond the Case-vs.-Baseline design.</li>
+<li>Extend iDEG for gene-set analysis</li>
+<li>Explore applications of single-subject methods in discovering the differences and similarities among patients.</li>
+
+</ul>
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org8dc104a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org8dc104a">Acknowledgements</h2>
+<div class="sliderow">
+
+<div class="leftcol">
+<br>
+<p align="left"> Committee members </p>
+<ul>
+<li> Jin Zhou</li>
+<li> Joseph W. Watkins</li>
+<li> Yves A. Lussier</li>
+<li> Hao Helen Zhang</li>
+</ul>
+<br>
+<br>
+<img src="https://www.nsf.gov/images/logos/nsf1.jpg"  height="130" width="130"/> <font color="white">spa</font>
+<img src="https://www.nih.gov/sites/default/files/styles/sidebar_media_breakpoint-small/public/about-nih/2012-logo.png?itok=WGmazXcU"  height="130" width="130"/>
+</div>
+
+<div class="rightcol">
+
+<br>
+<ul>
+<li> Statistics GIDP</li>
+<li> The Lussier Group</li>
+<li> College of Medicine</li>
+<li> CB2</li>
+<li> UofA Biostatistics</li>
+<li> My family</li>
+<img src="http://grad.arizona.edu/ui/images/ua_lockups/gidp-lockup-full-white.png" height="100" width="400" style="background-color:gray" />
+<img src="./Figures/CB2.png" height="100" width="400" style="background-color:gray" />
+</ul>
+
+</div>
+
+</div>
+
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org088a46a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org088a46a"></h2>
+<p>
+<br><br><br><br>
+Questions?
+</p>
+<div class="slide-footer"></div>
+</section>
+</section>
+<section>
+<section id="slide-org55d268a" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h2 id="org55d268a">Backup slides</h2>
+<div class="outline-text-2" id="text-org55d268a">
+</div><div class="slide-footer"></div>
+</section>
+<section id="slide-org32c24a4" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org32c24a4">DEG methods comparison</h3>
+
+<div class="figure">
+<p><img src="./Figures/table4-1.png" alt="table4-1.png" />
+</p>
+</div>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org045bb4b" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org045bb4b">Performance eval&#x2013;Poisson</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">DEG%</th>
+<th scope="col" class="org-left">Method</th>
+<th scope="col" class="org-left">Precision</th>
+<th scope="col" class="org-left">Recall/TPR</th>
+<th scope="col" class="org-left">FPR</th>
+<th scope="col" class="org-left">F1</th>
+<th scope="col" class="org-left"># Predicted DEG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">5%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.987 (5.0e-03)</td>
+<td class="org-left">0.878 (1.4e-02)</td>
+<td class="org-left">0.001 (2.4e-04)</td>
+<td class="org-left">0.929 (6.9e-03)</td>
+<td class="org-left">889.28 (1.6e+01)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.919 (9.2e-03)</td>
+<td class="org-left">0.934 (7.7e-03)</td>
+<td class="org-left">0.004 (5.2e-04)</td>
+<td class="org-left">0.926 (6.6e-03)</td>
+<td class="org-left">1016.25 (1.2e+01)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0.0e+00)</td>
+<td class="org-left">0 (0.0e+00)</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0.0e+00)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.903 (1.0e-02)</td>
+<td class="org-left">0.942 (7.2e-03)</td>
+<td class="org-left">0.005 (6.1e-04)</td>
+<td class="org-left">0.922 (6.7e-03)</td>
+<td class="org-left">1043.46 (1.3e+01)</td>
+</tr>
+
+<tr>
+<td class="org-right">10%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.989 (3.3e-03)</td>
+<td class="org-left">0.902 (9.4e-03)</td>
+<td class="org-left">0.001 (3.4e-04)</td>
+<td class="org-left">0.944 (4.7e-03)</td>
+<td class="org-left">1825.02 (2.2e+01)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.922 (6.2e-03)</td>
+<td class="org-left">0.951 (4.8e-03)</td>
+<td class="org-left">0.009 (7.7e-04)</td>
+<td class="org-left">0.937 (4.1e-03)</td>
+<td class="org-left">2063.76 (1.7e+01)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0.0e+00)</td>
+<td class="org-left">0 (0.0e+00)</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0.0e+00)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.907 (6.5e-03)</td>
+<td class="org-left">0.96 (4.0e-03)</td>
+<td class="org-left">0.011 (8.4e-04)</td>
+<td class="org-left">0.932 (4.0e-03)</td>
+<td class="org-left">2116.16 (1.7e+01)</td>
+</tr>
+
+<tr>
+<td class="org-right">15%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.99 (2.7e-03)</td>
+<td class="org-left">0.912 (7.2e-03)</td>
+<td class="org-left">0.002 (4.5e-04)</td>
+<td class="org-left">0.949 (3.6e-03)</td>
+<td class="org-left">2761.82 (2.6e+01)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.926 (4.3e-03)</td>
+<td class="org-left">0.958 (3.7e-03)</td>
+<td class="org-left">0.014 (8.5e-04)</td>
+<td class="org-left">0.942 (3.0e-03)</td>
+<td class="org-left">3105.45 (1.8e+01)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0.0e+00)</td>
+<td class="org-left">0 (0.0e+00)</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0.0e+00)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.91 (4.9e-03)</td>
+<td class="org-left">0.966 (3.2e-03)</td>
+<td class="org-left">0.017 (1.0e-03)</td>
+<td class="org-left">0.937 (3.1e-03)</td>
+<td class="org-left">3187.71 (2.0e+01)</td>
+</tr>
+
+<tr>
+<td class="org-right">20%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.991 (2.0e-03)</td>
+<td class="org-left">0.921 (6.0e-03)</td>
+<td class="org-left">0.002 (4.7e-04)</td>
+<td class="org-left">0.955 (3.0e-03)</td>
+<td class="org-left">3714.22 (2.8e+01)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.93 (4.4e-03)</td>
+<td class="org-left">0.964 (2.9e-03)</td>
+<td class="org-left">0.018 (1.2e-03)</td>
+<td class="org-left">0.946 (2.6e-03)</td>
+<td class="org-left">4145.66 (2.4e+01)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0.0e+00)</td>
+<td class="org-left">0 (0.0e+00)</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0.0e+00)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.913 (4.6e-03)</td>
+<td class="org-left">0.971 (2.4e-03)</td>
+<td class="org-left">0.023 (1.4e-03)</td>
+<td class="org-left">0.941 (2.7e-03)</td>
+<td class="org-left">4254.62 (2.5e+01)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-org5503b45" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="org5503b45">Performance-NB(varing \(\scriptsize \delta_g\))</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" table="rules=&quot;groups&quot;" style="font-size:40%">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">DEG%</th>
+<th scope="col" class="org-left">Method</th>
+<th scope="col" class="org-left">Precision</th>
+<th scope="col" class="org-left">Recall/TPR</th>
+<th scope="col" class="org-left">FPR</th>
+<th scope="col" class="org-left">F1</th>
+<th scope="col" class="org-left"># Predicted DEG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">5%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left"><font color="red">0.93</font> (1.6&times;10<sup>-2</sup>)</td>
+<td class="org-left"><font color="red">0.679</font> (2.5&times;10<sup>-2</sup>)</td>
+<td class="org-left">0.003 (7.2&times;10<sup>-4</sup>)</td>
+<td class="org-left">0.784 (1.5&times;10<sup>-2</sup>)</td>
+<td class="org-left">730 (3.4&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left"><font color="red">0.39</font> (8.4&times;10<sup>-3</sup>)</td>
+<td class="org-left"><font color="red">0.948</font> (7.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.078 (2.8&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.552 (8.6&times;10<sup>-3</sup>)</td>
+<td class="org-left">2433 (5.4&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">0.999 (2.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.152 (3.8&times;10<sup>-2</sup>)</td>
+<td class="org-left">0 (1.8&times;10<sup>-5</sup>)</td>
+<td class="org-left">0.262 (5.8&times;10<sup>-2</sup>)</td>
+<td class="org-left">152 (3.8&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.086 (6.7&times;10<sup>-4</sup>)</td>
+<td class="org-left">0.985 (3.9&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.549 (3.9&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.159 (1.2&times;10<sup>-3</sup>)</td>
+<td class="org-left">11409 (7.4&times;10<sup>1</sup>)</td>
+</tr>
+
+<tr>
+<td class="org-right">10%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.945 (1.1&times;10<sup>-2</sup>)</td>
+<td class="org-left">0.708 (2.2&times;10<sup>-2</sup>)</td>
+<td class="org-left">0.005 (1.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.809 (1.2&times;10<sup>-2</sup>)</td>
+<td class="org-left">1500 (5.9&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.447 (6.2&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.96 (4.3&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.132 (3.3&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.61 (6.0&times;10<sup>-3</sup>)</td>
+<td class="org-left">4296 (6.0&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">1 (0)</td>
+<td class="org-left">0 (5.2&times;10<sup>-4</sup>)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">0.002 (1.4&times;10<sup>-3</sup>)</td>
+<td class="org-left">1 (1.0&times;10<sup>0</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.165 (1.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.986 (2.5&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.556 (4.2&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.282 (1.6&times;10<sup>-3</sup>)</td>
+<td class="org-left">11974 (7.6&times;10<sup>1</sup>)</td>
+</tr>
+
+<tr>
+<td class="org-right">15%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.953 (7.0&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.746 (1.6&times;10<sup>-2</sup>)</td>
+<td class="org-left">0.006 (1.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.837 (9.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">2348 (5.8&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.537 (5.7&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.964 (3.7&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.147 (3.4&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.69 (4.8&times;10<sup>-3</sup>)</td>
+<td class="org-left">5384 (5.9&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">1 (NA)</td>
+<td class="org-left">0 (3.3&times;10<sup>-5</sup>)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">0.001 (NA)</td>
+<td class="org-left">1 (1.0&times;10<sup>-1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.235 (1.4&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.986 (2.1&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.565 (4.2&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.38 (1.9&times;10<sup>-3</sup>)</td>
+<td class="org-left">12562 (7.3&times;10<sup>1</sup>)</td>
+</tr>
+
+<tr>
+<td class="org-right">20%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.962 (4.6&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.763 (1.3&times;10<sup>-2</sup>)</td>
+<td class="org-left">0.008 (1.0&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.851 (7.8&times;10<sup>-3</sup>)</td>
+<td class="org-left">3175 (6.4&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.602 (5.7&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.966 (2.8&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.16 (3.9&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.742 (4.4&times;10<sup>-3</sup>)</td>
+<td class="org-left">6419 (6.4&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">NaN (NA)</td>
+<td class="org-left">0 (0)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.299 (1.6&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.986 (2.0&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.577 (4.2&times;10<sup>-3</sup>)</td>
+<td class="org-left">0.459 (1.9&times;10<sup>-3</sup>)</td>
+<td class="org-left">13180 (6.8&times;10<sup>1</sup>)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgffe4014" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgffe4014">Performance eval&#x2013;NB(constant \(\scriptsize \delta_g\))</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" table="rules=&quot;groups&quot;" style="font-size:45%">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">DEG%</th>
+<th scope="col" class="org-left">Method</th>
+<th scope="col" class="org-left">Precision</th>
+<th scope="col" class="org-left">Recall/TPR</th>
+<th scope="col" class="org-left">FPR</th>
+<th scope="col" class="org-left">F1</th>
+<th scope="col" class="org-left"># Predicted DEG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">5%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.957 (1.0&times; 10<sup>-2</sup>)</td>
+<td class="org-left">0.733 (1.9&times; 10<sup>-2</sup>)</td>
+<td class="org-left">0.002 (4.7&times; 10<sup>-4</sup>)</td>
+<td class="org-left">0.83 (1.1&times; 10<sup>-2</sup>)</td>
+<td class="org-left">765.73 (26)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.532 (1.1&times; 10<sup>-2</sup>)</td>
+<td class="org-left">0.935 (7.7&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.043 (1.9&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.678 (9.0&times; 10<sup>-3</sup>)</td>
+<td class="org-left">1759.67 (39)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">1 (0)</td>
+<td class="org-left">0.07 (3.6&times; 10<sup>-2</sup>)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">0.131 (6.1&times; 10<sup>-2</sup>)</td>
+<td class="org-left">70.35 (36)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.102 (9.0&times; 10<sup>-4</sup>)</td>
+<td class="org-left">0.985 (3.9&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.459 (4.4&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.184 (1.5&times; 10<sup>-3</sup>)</td>
+<td class="org-left">9698.75 (85)</td>
+</tr>
+
+<tr>
+<td class="org-right">10%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.966 (8.2&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.78 (1.9&times; 10<sup>-2</sup>)</td>
+<td class="org-left">0.003 (8.2&times; 10<sup>-4</sup>)</td>
+<td class="org-left">0.863 (9.7&times; 10<sup>-3</sup>)</td>
+<td class="org-left">1615.71 (50)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.639 (8.8&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.947 (5.2&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.06 (2.3&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.763 (6.8&times; 10<sup>-3</sup>)</td>
+<td class="org-left">2966.41 (42)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">NA (NA)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">NA (NA)</td>
+<td class="org-left">0 (0)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.19 (1.6&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.986 (2.8&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.468 (4.5&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.318 (2.3&times; 10<sup>-3</sup>)</td>
+<td class="org-left">10394.48 (80)</td>
+</tr>
+
+<tr>
+<td class="org-right">15%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.969 (5.1&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.814 (1.5&times; 10<sup>-2</sup>)</td>
+<td class="org-left">0.005 (8.3&times; 10<sup>-4</sup>)</td>
+<td class="org-left">0.884 (7.7&times; 10<sup>-3</sup>)</td>
+<td class="org-left">2519.36 (54)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.699 (7.2&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.954 (4.1&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.073 (2.5&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.807 (5.2&times; 10<sup>-3</sup>)</td>
+<td class="org-left">4098.27 (44)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">NA (NA)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">NA (NA)</td>
+<td class="org-left">0 (0)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.266 (2.1&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.987 (2.1&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.48 (5.0&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.419 (2.6&times; 10<sup>-3</sup>)</td>
+<td class="org-left">11127.73 (86)</td>
+</tr>
+
+<tr>
+<td class="org-right">20%</td>
+<td class="org-left">iDEG</td>
+<td class="org-left">0.974 (4.2&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.828 (1.5&times; 10<sup>-2</sup>)</td>
+<td class="org-left">0.006 (1.0&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.895 (7.8&times; 10<sup>-3</sup>)</td>
+<td class="org-left">3401.67 (74)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">edgeR</td>
+<td class="org-left">0.741 (6.0&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.96 (3.2&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.084 (2.6&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.836 (4.1&times; 10<sup>-3</sup>)</td>
+<td class="org-left">5181.78 (45)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DESeq</td>
+<td class="org-left">NA (NA)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">0 (0)</td>
+<td class="org-left">NA (NA)</td>
+<td class="org-left">0 (0)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">DEGseq</td>
+<td class="org-left">0.333 (2.3&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.987 (1.9&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.494 (5.0&times; 10<sup>-3</sup>)</td>
+<td class="org-left">0.498 (2.6&times; 10<sup>-3</sup>)</td>
+<td class="org-left">11857.92 (80)</td>
+</tr>
+</tbody>
+</table>
+<div class="slide-footer"></div>
+</section>
+<section id="slide-orgf2751c9" data-background="" data-background-size="" data-background-position="" data-background-repeat="" data-background-transition="">
+<div class="slide-header"></div>
+<h3 id="orgf2751c9">Performance eval&#x2013;NB (<u>constant</u> \(\scriptsize \delta_g\))</h3>
+
+<div class="figure">
+<p><img src="./Figures/fig-study3.png" alt="fig-study3.png" />
+</p>
+</div>
 <div class="slide-footer"></div>
 </section>
 </section>

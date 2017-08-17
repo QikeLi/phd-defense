@@ -231,8 +231,8 @@ From two matched transcriptomes, identify *patient-specific* molecular defects a
 ** Main Challenges
 @@html:<br> @@
 - "Single-subject Single-observation" (sample size = *1*)
-  - Different genes have different variances. 
-  - only two numbers for each gene
+  - Different genes have different variances 
+  - Only two numbers for each gene
 
 #+BEGIN_SRC R :exports results :results graphics :file ./Figures/fig-tnbc.png :session :eval no
 base_size <- 20
@@ -323,7 +323,7 @@ To identify DEG:
   - Background noise
 - *Goal* 
   #+ATTR_HTML: :style font-size:70% 
-  - Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy).  
+  - Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy)
 - *Method*
   #+ATTR_HTML: :style font-size:70% 
   - Step1: Gaussian mixture model to cluster genes
@@ -379,7 +379,7 @@ To identify DEG:
   - Relax the Gaussian assumption of MixEnrich
 - *Goal* 
   #+ATTR_HTML: :style font-size:70% 
-  - Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy).  
+  - Identify DEPs from two matched transcriptomes (e.g., cancerous vs. healthy)
 - *Method*
   #+ATTR_HTML: :style font-size:70% 
   - Step1: k-means to cluster genes
@@ -524,7 +524,7 @@ Model RNA-Seq data with negative binomial distribution:
   - of gene expression absolute differences
 - GFOLD [fn:1:]  
   - Poisson distribution assumption
-  - Ranks genes for differential expression, 
+  - Ranks genes for differential expression
   - no significance assessment
 #+BEGIN_EXPORT html
 <div class="reference"> 
@@ -536,7 +536,7 @@ Model RNA-Seq data with negative binomial distribution:
 
 - DESeq[fn:1:]  
   - Negative binomial distribution assumption
-  - Treats the two samples as if they were replicates.
+  - Treats the two samples as if they were replicates
 
 - DEGSeq[fn:2:]
   - binomial distribution assumption
@@ -718,11 +718,11 @@ $f_{0}$ corresponds to an empirical null distribution.
 #+ATTR_HTML: :align left :style font-size:90%
 In practice, the theoretical null may be deficient due to various reasons: 
 
-- correlation across genes
+- Correlation across genes
 
-- unobserved covariates (e.g. gender, age, smoking status, etc.)
+- Unobserved covariates (e.g. gender, age, smoking status, etc.)
 
-- or failed mathematical assumptions (e.g. asymptotic approximation).
+- Failed mathematical assumptions (e.g. asymptotic approximation).
 # #+ATTR_HTML: :align left :style font-size:90%
 #  Fortunately, in large-scale simultaneous testing, the parallel structure allows the estimation of an empirical null distribution, via empirical Bayes, from the own data of the study. 
 ** Algorithm
@@ -750,11 +750,12 @@ In practice, the theoretical null may be deficient due to various reasons:
 h_{nb}(Y_{gd}) = \frac{1}{\sqrt{\delta_{g}}}sinh^{-1}\sqrt{Y_{gd} \delta_{g}} +\sqrt{1/\delta_{g} - 1}sinh^{-1}\sqrt{\frac{Y_{gd} + 3/4}{1/\delta_{g} -3/2}}  
 \end{equation}
 ** Estimate $\scriptsize{\delta_g}$
+@@html:<br><br>@@
 #+ATTR_HTML: :align left
 Assumptions 
 #+ATTR_REVEAL: :frag (appear)
   - $\delta_{g1} = \delta_{g2} = \delta_{g}$ and $\delta_{g}$ is a smooth function $q(\cdot)$ of the expression mean $\mu_{g}$.
-  - The majority of the genes are null genes ($\overline{\mathcal{G}}$).   
+  - The majority of the genes are null genes ($\overline{\mathcal{G}}$) 
 # Specifically,   
 # #+ATTR_HTML: :style font-size:80%
 # \begin{eqnarray*}
